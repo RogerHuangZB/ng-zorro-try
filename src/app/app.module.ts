@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AppComponent } from './app.component';
+import {routing} from "./app.routing";
+import {RouterModule} from "@angular/router";
+import {PagesModule} from "./pages/pages.module";
 
 @NgModule({
   declarations: [
@@ -14,6 +17,9 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    routing,
+    PagesModule,
+    RouterModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot()
   ],
