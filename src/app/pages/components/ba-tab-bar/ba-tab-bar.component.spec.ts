@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserManage } from './user-manage.component';
+import { BaTabBarComponent } from './ba-tab-bar.component';
 
-describe('UserManageComponent', () => {
-  let component: UserManage;
-  let fixture: ComponentFixture<UserManage>;
+describe('BaTabBarComponent', () => {
+  let component: BaTabBarComponent;
+  let fixture: ComponentFixture<BaTabBarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserManage ]
+      declarations: [ BaTabBarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserManage);
+    fixture = TestBed.createComponent(BaTabBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

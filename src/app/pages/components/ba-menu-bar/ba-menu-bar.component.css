@@ -1,0 +1,9 @@
+.menu-bar {
+  position: fixed;
+  top:50px;
+  bottom: 0;
+  left:0;
+  width: 180px;
+  z-index: 9998;
+  background-color: #242424;
+}

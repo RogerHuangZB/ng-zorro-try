@@ -21,7 +21,7 @@ import {PagesModule} from "./pages/pages.module";
     PagesModule,
     RouterModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule.forRoot()
+    // NgZorroAntdModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })

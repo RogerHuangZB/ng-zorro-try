@@ -12,8 +12,7 @@ export const routes: Routes = [
     children: [{
       path: '',
       children: [
-        {path: '', redirectTo: 'tabbar', pathMatch: 'full'},
-        {path: 'tabbar', loadChildren: './tabbar/tabbar.module#TabbarModule'},
+        {path: '', redirectTo: '', pathMatch: 'full'},
       ]
     }]
   }
