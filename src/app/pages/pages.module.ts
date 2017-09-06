@@ -7,9 +7,7 @@ import { BaPageTopComponent } from './components/ba-page-top/ba-page-top.compone
 import { BaMenuBarComponent } from './components/ba-menu-bar/ba-menu-bar.component';
 import { BaTabBarComponent } from './components/ba-tab-bar/ba-tab-bar.component';
 import {NgZorroAntdModule} from "ng-zorro-antd/src/release/ng-zorro-antd.module";
-import { TestComponent } from './test/test.component';
-import { Test1Component } from './test1/test1.component';
-import { Test2Component } from './test2/test2.component';
+import {importComs} from "./comsMgr";
 
 @NgModule({
   imports: [
@@ -18,9 +16,7 @@ import { Test2Component } from './test2/test2.component';
     NgZorroAntdModule
   ],
   entryComponents: [
-    TestComponent,
-    Test1Component,
-    Test2Component
+    ...importComs
   ],
   declarations: [
     Pages,
@@ -28,11 +24,11 @@ import { Test2Component } from './test2/test2.component';
     BaPageTopComponent,
     BaMenuBarComponent,
     BaTabBarComponent,
-    TestComponent,
-    Test1Component,
-    Test2Component
+    ...importComs
   ],
-  providers: [ ]
+  providers: [
+
+  ]
 })
 
 export class PagesModule {

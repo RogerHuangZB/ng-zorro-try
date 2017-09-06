@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver} from '@angular/core';
-import {TestComponent} from "../../test/test.component";
-import {Test1Component} from "../../test1/test1.component";
-import {Test2Component} from "../../test2/test2.component";
+import {
+  Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, ViewChildren,
+  QueryList
+} from '@angular/core';
+import {coms} from "../../comsMgr";
 
 @Component({
   selector: 'ba-tab-bar',
@@ -10,38 +11,72 @@ import {Test2Component} from "../../test2/test2.component";
 })
 export class BaTabBarComponent implements OnInit {
 
-  tabs = [
-    {
-      name: 'Tab'
-    },
-    {
-      name: 'Tab 1'
-    }
-  ];
+  tabs = [];
+
+  homeTab = {
+    name: 'Test',
+    comId: 'TestComponent'
+  };
 
   closeTab(tab) {
     this.tabs.splice(this.tabs.indexOf(tab), 1);
   };
 
-  newTab() {
-    this.tabs.push({
-      name: 'New Tab'
-    });
-    this.addContent();
+  newTabFlag:boolean = false;
+  newTabObj: any = null;
+
+  initHomeTab(tab:any){
+    this.newTabFlag = true;
+    this.newTabObj = tab;
+    this.tabs.push(tab);
+  }
+
+  // public add(tab:any) {
+  //   this.newTabFlag = true;
+  //   this.newTabObj = tab;
+  //   this.tabs.push(tab);
+  // };
+
+  test1 = {
+    name: 'Test1',
+    comId: 'Test1Component'
   };
 
-  @ViewChild('componCont',{read:ViewContainerRef}) componCont:ViewContainerRef;
+  test2 = {
+    name: 'Test2',
+    comId: 'Test2Component'
+  };
+
+  public addTab(tab:any) {
+    console.log(tab);
+    this.newTabFlag = true;
+    this.newTabObj = tab;
+    this.tabs.push(tab);
+  };
+
+  @ViewChildren('nzTabBody',{read:ViewContainerRef}) nzTabBody: QueryList<ViewContainerRef>;
 
   constructor(
     private componentFactoryResolver:ComponentFactoryResolver
   ) { }
 
-  ngOnInit() {
+  ngOnInit(){
+    console.log("BaTabBarComponent");
+    this.initHomeTab(this.homeTab);
   }
 
-  addContent(){
-    let content = this.componentFactoryResolver.resolveComponentFactory(TestComponent);
-    this.componCont.createComponent(content);
+  ngAfterViewChecked(){
+    // console.log("ngAfterViewChecked");
+    // console.log(this.nzTabBody.last);
+    if (this.newTabFlag){
+      this.addComponent(this.newTabObj);
+      this.newTabFlag = false;
+    }
+  }
+
+  addComponent(tab:any){
+    let com = this.componentFactoryResolver.resolveComponentFactory(coms[tab.comId]);
+    this.nzTabBody.last.createComponent(com);
   }
 
 }

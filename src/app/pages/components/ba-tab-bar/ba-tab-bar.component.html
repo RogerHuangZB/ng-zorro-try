@@ -1,14 +1,14 @@
-<nz-tabset [nzType]="'card'">
-  <nz-tab *ngFor="let tab of tabs">
+<nz-tabset [nzType]="'card'" #nzTabset>
+  <nz-tab *ngFor="let tab of tabs,let i = index">
     <ng-template #nzTabHeading>
       <div>
         {{tab.name}}
-        <i class="anticon anticon-cross" (click)="closeTab(tab)"></i>
+        <i *ngIf="i>0" class="anticon anticon-cross" (click)="closeTab(tab)"></i>
       </div>
     </ng-template>
-    <ng-template #componCont></ng-template>
+    <ng-template #nzTabBody></ng-template>
   </nz-tab>
   <ng-template #nzTabBarExtraContent>
-    <i class="ant-tabs-new-tab anticon anticon-plus" (click)="newTab()"></i>
+    <i class="ant-tabs-new-tab anticon anticon-plus" (click)="addTab(test1)"></i>
   </ng-template>
 </nz-tabset>

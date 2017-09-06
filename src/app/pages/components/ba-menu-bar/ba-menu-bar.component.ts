@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BaTabBarComponent} from "../ba-tab-bar/ba-tab-bar.component";
 
 @Component({
   selector: 'ba-menu-bar',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaMenuBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+
+  ) { }
 
   ngOnInit() {
+  }
+
+  add(comStr:string){
+    console.log(comStr);
+    let tab = {
+      name: comStr,
+      comId: comStr+'Component'
+    };
   }
 
 }
