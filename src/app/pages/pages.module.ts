@@ -8,6 +8,7 @@ import { BaMenuBarComponent } from './components/ba-menu-bar/ba-menu-bar.compone
 import { BaTabBarComponent } from './components/ba-tab-bar/ba-tab-bar.component';
 import {NgZorroAntdModule} from "ng-zorro-antd/src/release/ng-zorro-antd.module";
 import {importComs} from "./comsMgr";
+import {BaTabBarService} from "./components/ba-tab-bar/ba-tab-bar.service";
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import {importComs} from "./comsMgr";
     ...importComs
   ],
   providers: [
-
+    BaTabBarService
   ]
 })
 

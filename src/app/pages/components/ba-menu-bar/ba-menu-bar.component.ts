@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {BaTabBarComponent} from "../ba-tab-bar/ba-tab-bar.component";
+import {BaTabBarService} from "../ba-tab-bar/ba-tab-bar.service";
 
 @Component({
   selector: 'ba-menu-bar',
@@ -9,18 +9,18 @@ import {BaTabBarComponent} from "../ba-tab-bar/ba-tab-bar.component";
 export class BaMenuBarComponent implements OnInit {
 
   constructor(
-
+    private baTabBarService:BaTabBarService
   ) { }
 
   ngOnInit() {
   }
 
-  add(comStr:string){
-    console.log(comStr);
+  addTab(comStr:string){
     let tab = {
       name: comStr,
       comId: comStr+'Component'
     };
+    this.baTabBarService.addTab(tab);
   }
 
 }

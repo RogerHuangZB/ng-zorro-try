@@ -3,6 +3,8 @@ import {
   QueryList
 } from '@angular/core';
 import {coms} from "../../comsMgr";
+import {BaTabBarService} from "./ba-tab-bar.service";
+import {TabModel} from "./Tab.model";
 
 @Component({
   selector: 'ba-tab-bar',
@@ -11,66 +13,51 @@ import {coms} from "../../comsMgr";
 })
 export class BaTabBarComponent implements OnInit {
 
-  tabs = [];
+  @ViewChildren('nzTabBody',{read:ViewContainerRef}) nzTabBody: QueryList<ViewContainerRef>;
 
-  homeTab = {
+  tabs: TabModel[] = [];
+
+  homeTab:TabModel = {
     name: 'Test',
     comId: 'TestComponent'
   };
 
-  closeTab(tab) {
-    this.tabs.splice(this.tabs.indexOf(tab), 1);
-  };
-
-  newTabFlag:boolean = false;
-  newTabObj: any = null;
-
-  initHomeTab(tab:any){
-    this.newTabFlag = true;
-    this.newTabObj = tab;
-    this.tabs.push(tab);
-  }
-
-  // public add(tab:any) {
-  //   this.newTabFlag = true;
-  //   this.newTabObj = tab;
-  //   this.tabs.push(tab);
-  // };
-
-  test1 = {
+  test1:TabModel = {
     name: 'Test1',
     comId: 'Test1Component'
   };
 
-  test2 = {
+  test2:TabModel = {
     name: 'Test2',
     comId: 'Test2Component'
   };
 
-  public addTab(tab:any) {
-    console.log(tab);
-    this.newTabFlag = true;
-    this.newTabObj = tab;
-    this.tabs.push(tab);
-  };
-
-  @ViewChildren('nzTabBody',{read:ViewContainerRef}) nzTabBody: QueryList<ViewContainerRef>;
-
   constructor(
-    private componentFactoryResolver:ComponentFactoryResolver
-  ) { }
+    private componentFactoryResolver:ComponentFactoryResolver,
+    private baTabBarService:BaTabBarService
+  ) {
+    this.tabs = this.baTabBarService.tabs;
+  }
 
   ngOnInit(){
-    console.log("BaTabBarComponent");
-    this.initHomeTab(this.homeTab);
+    console.log("BaTabBarComponent Oninit");
+    this.baTabBarService.initHomeTab(this.homeTab);
+  }
+
+  addTab(tab:TabModel){
+    this.baTabBarService.newTabFlag = true;
+    this.baTabBarService.newTabObj = tab;
+  }
+
+  closeTab(tab){
+    this.baTabBarService.closeTab(tab);
   }
 
   ngAfterViewChecked(){
-    // console.log("ngAfterViewChecked");
-    // console.log(this.nzTabBody.last);
-    if (this.newTabFlag){
-      this.addComponent(this.newTabObj);
-      this.newTabFlag = false;
+    console.log("BaTabBarComponent ngAfterViewChecked");
+    if (this.baTabBarService.newTabFlag){
+      this.addComponent(this.baTabBarService.newTabObj);
+      this.baTabBarService.newTabFlag = false;
     }
   }
 
