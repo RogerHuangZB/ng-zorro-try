@@ -1,13 +1,65 @@
+<!--<div class="menu-bar">-->
+  <!--<ul>-->
+    <!--<li>-->
+      <!--<button class="btn" (click)="addTab('Test')">Test</button>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<button class="btn" (click)="addTab('Test1')">Test1</button>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<button class="btn" (click)="addTab('Test2')">Test2</button>-->
+    <!--</li>-->
+  <!--</ul>-->
+<!--</div>-->
+
 <div class="menu-bar">
-  <ul>
-    <li>
-      <button class="btn" (click)="addTab('Test')">Test</button>
+  <!--<nz-switch [(ngModel)]="theme">-->
+    <!--<span checked>Dark</span>-->
+    <!--<span unchecked>Light</span>-->
+  <!--</nz-switch>-->
+  <!--<br>-->
+  <!--<br>-->
+  <ul nz-menu [nzMode]="'inline'" style="width: 100%;" [nzTheme]="theme?'dark':'light'">
+    <li nz-submenu >
+      <span title><i class="anticon anticon-mail"></i> Navigation One</span>
+      <ul>
+        <li nz-menu-group>
+          <span title>Item 1</span>
+          <ul>
+            <li nz-menu-item>Option 1</li>
+            <li nz-menu-item>Option 2</li>
+          </ul>
+        </li>
+        <li nz-menu-group>
+          <span title>Item 2</span>
+          <ul>
+            <li nz-menu-item>Option 3</li>
+            <li nz-menu-item>Option 4</li>
+          </ul>
+        </li>
+      </ul>
     </li>
-    <li>
-      <button class="btn" (click)="addTab('Test1')">Test1</button>
+    <li nz-submenu>
+      <span title><i class="anticon anticon-appstore"></i> Navigation Two</span>
+      <ul>
+        <li nz-menu-item>Option 5</li>
+        <li nz-menu-item>Option 6</li>
+        <li nz-submenu>
+          <span title>Submenu</span>
+          <ul>
+            <li nz-menu-item>Option 7</li>
+            <li nz-menu-item>Option 8</li>
+          </ul>
+        </li>
+      </ul>
     </li>
-    <li>
-      <button class="btn" (click)="addTab('Test2')">Test2</button>
+    <li nz-submenu [nzOpen]="true">
+      <span title><i class="anticon anticon-setting"></i> Navigation Three</span>
+      <ul>
+        <li nz-menu-item (click)="addTab('Test')">Test</li>
+        <li nz-menu-item (click)="addTab('Test1')">Test1</li>
+        <li nz-menu-item (click)="addTab('Test2')">Test2</li>
+      </ul>
     </li>
   </ul>
 </div>

@@ -7,6 +7,7 @@ import {BaTabBarService} from "../ba-tab-bar/ba-tab-bar.service";
   styleUrls: ['./ba-menu-bar.component.css']
 })
 export class BaMenuBarComponent implements OnInit {
+  theme = true;
 
   constructor(
     private baTabBarService:BaTabBarService
