@@ -1,5 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {HttpModule} from "@angular/http";
+import {FormsModule} from "@angular/forms";
 import {Pages} from "./pages.component";
 import {routing} from "./pages.routing";
 import { Login } from './login/login.component';
@@ -13,6 +15,8 @@ import {BaTabBarService} from "./components/ba-tab-bar/ba-tab-bar.service";
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    HttpModule,
     routing,
     NgZorroAntdModule
   ],
