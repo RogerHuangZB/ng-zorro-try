@@ -1,5 +1,6 @@
 /*
   开发模式下本组件增加Tab会报以下ERROR:
+  ---------------------------------
     ExpressionChangedAfterItHasBeenCheckedError:
     Expression has changed after it was checked.
     Previous value: '0'. Current value: '1'.

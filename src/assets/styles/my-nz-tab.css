@@ -1,0 +1,22 @@
+.nz-tabset-style .ant-tabs-bar {
+  margin-bottom: 0;
+}
+
+.nz-tabset-style .ant-tabs-nav .ant-tabs-tab .anticon {
+  margin-right: -10px;
+  margin-left: 10px;
+}
+
+.nz-tabset-style .ant-tabs-content {
+  position: absolute;
+  top:32px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.nz-tabset-style .ant-tabs-tabpane {
+  height:100%;
+  overflow: auto;
+}
+

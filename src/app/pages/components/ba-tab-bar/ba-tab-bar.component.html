@@ -1,19 +1,23 @@
-<nz-tabset #nzTabset
-           [nzType]="'card'"
-           [(nzSelectedIndex)]="selectedIndex">
+<div class="tab-bar">
+  <nz-tabset #nzTabset
+             [nzType]="'card'"
+             [(nzSelectedIndex)]="selectedIndex"
+             class="nz-tabset-style">
 
-  <nz-tab *ngFor="let tab of tabs,let i = index">
-    <ng-template #nzTabHeading>
-      <div>
-        {{tab.name}}
-        <i *ngIf="i>0" class="anticon anticon-cross" (click)="closeTab(tab)"></i>
-      </div>
-    </ng-template>
-    <ng-template #nzTabBody></ng-template>
-  </nz-tab>
+    <nz-tab *ngFor="let tab of tabs,let i = index">
+      <ng-template #nzTabHeading>
+        <div>
+          {{tab.name}}
+          <i *ngIf="i>0" class="anticon anticon-cross" (click)="closeTab(tab)"></i>
+        </div>
+      </ng-template>
+      <ng-template #nzTabBody></ng-template>
+    </nz-tab>
 
-  <!--<ng-template #nzTabBarExtraContent>-->
+    <!--<ng-template #nzTabBarExtraContent>-->
     <!--<i class="ant-tabs-new-tab anticon anticon-plus" (click)="addTab(test1)"></i>-->
-  <!--</ng-template>-->
+    <!--</ng-template>-->
 
-</nz-tabset>
+  </nz-tabset>
+</div>
+
