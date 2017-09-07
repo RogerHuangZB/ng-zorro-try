@@ -1,4 +1,7 @@
-<nz-tabset [nzType]="'card'" #nzTabset>
+<nz-tabset #nzTabset
+           [nzType]="'card'"
+           [(nzSelectedIndex)]="selectedIndex">
+
   <nz-tab *ngFor="let tab of tabs,let i = index">
     <ng-template #nzTabHeading>
       <div>
@@ -8,7 +11,9 @@
     </ng-template>
     <ng-template #nzTabBody></ng-template>
   </nz-tab>
-  <ng-template #nzTabBarExtraContent>
-    <i class="ant-tabs-new-tab anticon anticon-plus" (click)="addTab(test1)"></i>
-  </ng-template>
+
+  <!--<ng-template #nzTabBarExtraContent>-->
+    <!--<i class="ant-tabs-new-tab anticon anticon-plus" (click)="addTab(test1)"></i>-->
+  <!--</ng-template>-->
+
 </nz-tabset>

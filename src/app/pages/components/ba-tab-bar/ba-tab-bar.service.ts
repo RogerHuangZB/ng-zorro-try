@@ -1,32 +1,40 @@
-import {Injectable} from "@angular/core";
+import {Injectable, EventEmitter} from "@angular/core";
 import {TabModel} from "./Tab.model";
+
 @Injectable()
 export class BaTabBarService {
 
   public tabs: TabModel[] = [];
   public newTabFlag: boolean = false;
   public newTabObj: TabModel = null;
-
-  public initHomeTab(tab:TabModel){
-    this.newTabFlag = true;
-    this.newTabObj = tab;
-    this.addTab(tab);
-  }
+  public select: EventEmitter<any> = new EventEmitter();
 
   public addTab(tab:TabModel){
-    this.newTabFlag = true;
-    this.newTabObj = tab;
-    this.tabs.push(tab);
+    let tabName = tab.name;
+    // console.log(tab.name);
+    // console.log(this.tabs);
+    let isTabExistFlag = this.isTabExist(tabName);
+    if(isTabExistFlag<0){
+      this.newTabFlag = true;
+      this.newTabObj = tab;
+      this.tabs.push(tab);
+    }else {
+      this.select.emit(isTabExistFlag);
+    }
   }
 
   public closeTab(tab) {
     this.tabs.splice(this.tabs.indexOf(tab), 1);
   };
 
-  //TODO: 选中新增的tab
+  isTabExist(tabName:string):number{
+    for(let i=0;i<this.tabs.length;i++){
+      if(tabName === this.tabs[i].name){
+        return i;
+      }
+    }
+    return -1;
+  }
 
-  //TODO: 同一个tab不能重复添加，显示该tab
-
-  //TODO: ?没有调用homeTab的ngOnInit()方法
 
 }
