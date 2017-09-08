@@ -7,17 +7,27 @@
 import {TestComponent} from "./test/test.component";
 import {Test2Component} from "./test2/test2.component";
 import {Test1Component} from "./test1/test1.component";
+import {UserManageComponent} from "./sysManage/user-manage/user-manage.component";
 
 let coms = {
   TestComponent,
   Test1Component,
   Test2Component,
+  UserManageComponent
+};
+
+let comsTitle = {
+  'TestComponent': '测试',
+  'Test1Component': '测试1',
+  'Test2Component': '测试2',
+  'UserManageComponent': '用户管理',
 };
 
 const importComs = [
   TestComponent,
   Test1Component,
   Test2Component,
+  UserManageComponent
 ];
 
-export { coms, importComs }
+export { coms, comsTitle, importComs }

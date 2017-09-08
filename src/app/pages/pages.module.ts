@@ -29,7 +29,7 @@ import {BaTabBarService} from "./components/ba-tab-bar/ba-tab-bar.service";
     BaPageTopComponent,
     BaMenuBarComponent,
     BaTabBarComponent,
-    ...importComs
+    ...importComs,
   ],
   providers: [
     BaTabBarService

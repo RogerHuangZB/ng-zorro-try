@@ -1,33 +1,8 @@
 
 <div class="menu-bar">
-  <!--<nz-switch [(ngModel)]="theme">-->
-    <!--<span checked>Dark</span>-->
-    <!--<span unchecked>Light</span>-->
-  <!--</nz-switch>-->
-  <!--<br>-->
-  <!--<br>-->
   <ul nz-menu [nzMode]="'inline'" style="width: 100%;" [nzTheme]="theme?'dark':'light'">
-    <li nz-submenu >
-      <span title><i class="anticon anticon-mail"></i> Navigation One</span>
-      <ul>
-        <li nz-menu-group>
-          <span title>Item 1</span>
-          <ul>
-            <li nz-menu-item>Option 1</li>
-            <li nz-menu-item>Option 2</li>
-          </ul>
-        </li>
-        <li nz-menu-group>
-          <span title>Item 2</span>
-          <ul>
-            <li nz-menu-item>Option 3</li>
-            <li nz-menu-item>Option 4</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
     <li nz-submenu>
-      <span title><i class="anticon anticon-appstore"></i> Navigation Two</span>
+      <span title><i class="anticon anticon-appstore"></i> Navigation </span>
       <ul>
         <li nz-menu-item>Option 5</li>
         <li nz-menu-item>Option 6</li>
@@ -41,11 +16,12 @@
       </ul>
     </li>
     <li nz-submenu [nzOpen]="true">
-      <span title><i class="anticon anticon-setting"></i> Navigation Three</span>
+      <span title><i class="anticon anticon-setting"></i>系统管理</span>
       <ul>
-        <li nz-menu-item (click)="addTab('Test')">Test</li>
-        <li nz-menu-item (click)="addTab('Test1')">Test1</li>
-        <li nz-menu-item (click)="addTab('Test2')">Test2</li>
+        <li nz-menu-item (click)="addTab('TestComponent')">测试</li>
+        <li nz-menu-item (click)="addTab('Test1Component')">测试1</li>
+        <li nz-menu-item (click)="addTab('Test2Component')">测试2</li>
+        <li nz-menu-item (click)="addTab('UserManageComponent')">用户管理</li>
       </ul>
     </li>
   </ul>

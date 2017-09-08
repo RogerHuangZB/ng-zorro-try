@@ -8,14 +8,14 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.4rem;
+  height: 0.4rem;
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgba(0,0,0, 0.2);
   cursor: pointer;
-  border-radius: 0.25rem;
+  /*border-radius: 0.2rem;*/
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -23,5 +23,5 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0,0,0, 0.1);
+  background: transparent;
 }
