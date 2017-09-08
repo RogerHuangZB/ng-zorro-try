@@ -33,18 +33,8 @@ export class BaTabBarComponent implements OnInit {
   selectedIndex: number = 0;
 
   homeTab:TabModel = {
-    name: 'Test',
+    name: '测试',
     comId: 'TestComponent'
-  };
-
-  test1:TabModel = {
-    name: 'Test1',
-    comId: 'Test1Component'
-  };
-
-  test2:TabModel = {
-    name: 'Test2',
-    comId: 'Test2Component'
   };
 
   constructor(
