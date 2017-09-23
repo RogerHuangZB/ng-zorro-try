@@ -73,70 +73,113 @@
     <button nz-button [disabled]="_disabledButton" [nzType]="'primary'" [nzLoading]="_operating" (click)="_operateData()">Operating</button>
     <span style="margin-left: 8px;" *ngIf="_checkedNumber">Selected {{_checkedNumber}} items</span>
   </div>
-  <nz-table
-    #nzTable
-    [nzDataSource]="_dataSet"
-    [nzPageSize]="10"
-    (nzDataChange)="_displayDataChange($event)"
-    (nzPageIndexChange)="_refreshStatus()"
-    (nzPageSizeChange)="_refreshStatus()"
-    [nzBordered]="_bordered"
-    [nzLoading]="_loading"
-    [nzIsPagination]="_pagination"
-    [nzShowFooter]="_footer"
-    [nzShowTitle]="_title"
-    [nzSize]="_size">
-    <span nz-table-title>用户列表</span>
-    <thead nz-thead *ngIf="_header">
-    <tr>
-      <th nz-th [nzCheckbox]="true">
-        <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
-        </label>
-      </th>
-      <th nz-th><span>姓名</span></th>
-      <th nz-th><span>年龄</span></th>
-      <th nz-th><span>地址</span></th>
-      <th nz-th><span>描述</span></th>
-      <th nz-th><span>操作</span></th>
-    </tr>
-    </thead>
-    <tbody nz-tbody>
-    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-      <td nz-td [nzCheckbox]="true">
-        <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)">
-        </label>
-      </td>
-      <td nz-td>{{data.name}}</td>
-      <td nz-td>{{data.age}}</td>
-      <td nz-td>{{data.address}}</td>
-      <td nz-td>{{data.description}}</td>
-      <td nz-td>
-            <span>
-              <a href="#">查看 一 {{data.name}}</a>
-              <span nz-table-divider></span>
-              <a href="#">删除</a>
-              <span nz-table-divider></span>
-              <nz-dropdown>
-                <a class="ant-dropdown-link" nz-dropdown>
-                  更多操作 <i class="anticon anticon-down"></i>
-                </a>
-                <ul nz-menu>
-                  <li nz-menu-item>
-                    <a target="_blank" rel="noopener noreferrer" href="/">编辑</a>
-                  </li>
-                  <li nz-menu-item>
-                    <a target="_blank" rel="noopener noreferrer" href="/">复制</a>
-                  </li>
-                  <li nz-menu-item>
-                    <a target="_blank" rel="noopener noreferrer" href="/">授权</a>
-                  </li>
-                </ul>
-              </nz-dropdown>
-            </span>
-      </td>
-    </tr>
-    </tbody>
-    <span nz-table-footer>总共10条数据<1-10></span>
-  </nz-table>
+  <div class="datatable-cont">
+    <nz-table
+      #nzTable
+      [nzScroll]="{ y: 540 }"
+      [nzDataSource]="_dataSet"
+      [nzPageSize]="10"
+      (nzDataChange)="_displayDataChange($event)"
+      (nzPageIndexChange)="_refreshStatus()"
+      (nzPageSizeChange)="_refreshStatus()"
+      [nzBordered]="_bordered"
+      [nzLoading]="_loading"
+      [nzIsPagination]="_pagination"
+      [nzShowFooter]="_footer"
+      [nzShowTitle]="_title"
+      [nzSize]="_size">
+      <!--<colgroup span="16">-->
+        <!--<col style="width: 40px;">-->
+        <!--<col >-->
+        <!--<col >-->
+        <!--<col style="width: 340px;">-->
+        <!--<col style="width: 100px;">-->
+        <!--<col style="width: 60px;">-->
+        <!--<col style="width: 140px;">-->
+        <!--<col style="width: 100px;">-->
+        <!--<col style="width: 100px;">-->
+        <!--<col style="width: 100px;">-->
+        <!--<col style="width: 100px;">-->
+        <!--<col style="width: 100px;">-->
+        <!--<col style="width: 100px;">-->
+        <!--<col style="width: 100px;">-->
+        <!--<col style="width: 100px;">-->
+        <!--<col style="width: 100px;">-->
+      <!--</colgroup>-->
+      <span nz-table-title>用户列表</span>
+      <ng-template #nzFixedHeader>
+      <thead nz-thead *ngIf="_header">
+        <tr>
+          <th rowspan="2" nz-th [nzCheckbox]="true" [nzWidth]="'100px'">
+            <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)"></label>
+          </th>
+          <th colspan="3" nz-th [nzWidth]="'101px'"><span>用户信息</span></th>
+          <th colspan="9" nz-th [nzWidth]="'102px'"><span>描述group</span></th>
+          <th rowspan="2" nz-th [nzWidth]="'103px'"><span>操作</span></th>
+        </tr>
+        <tr>
+          <th nz-th [nzWidth]="'104px'"><span>姓名</span></th>
+          <th nz-th [nzWidth]="'105px'"><span>年龄</span></th>
+          <th nz-th [nzWidth]="'106px'"><span>地址</span></th>
+
+          <th nz-th [nzWidth]="'100px'"><span>描述1</span></th>
+          <th nz-th [nzWidth]="'100px'"><span>描述2</span></th>
+          <th nz-th [nzWidth]="'100px'"><span>描述3</span></th>
+          <th nz-th [nzWidth]="'100px'"><span>描述4</span></th>
+          <th nz-th [nzWidth]="'100px'"><span>描述5</span></th>
+          <th nz-th [nzWidth]="'100px'"><span>描述6</span></th>
+          <th nz-th [nzWidth]="'100px'"><span>描述7</span></th>
+          <th nz-th [nzWidth]="'100px'"><span>描述8</span></th>
+          <th nz-th [nzWidth]="'100px'"><span>描述9</span></th>
+        </tr>
+      </thead>
+      </ng-template>
+      <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+          <td nz-td [nzCheckbox]="true">
+            <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="_refreshStatus($event)">
+            </label>
+          </td>
+          <td nz-td>{{data.name}}</td>
+          <td nz-td>{{data.age}}</td>
+          <td nz-td>{{data.address}}</td>
+          <td nz-td>{{data.description1}}</td>
+          <td nz-td>{{data.description2}}</td>
+          <td nz-td>{{data.description3}}</td>
+          <td nz-td>{{data.description4}}</td>
+          <td nz-td>{{data.description5}}</td>
+          <td nz-td>{{data.description6}}</td>
+          <td nz-td>{{data.description7}}</td>
+          <td nz-td>{{data.description8}}</td>
+          <td nz-td>{{data.description9}}</td>
+          <td nz-td>
+              <span>
+                <a href="#">查看 一 {{data.name}}</a>
+                <span nz-table-divider></span>
+                <a href="#">删除</a>
+                <span nz-table-divider></span>
+                <nz-dropdown>
+                  <a class="ant-dropdown-link" nz-dropdown>
+                    更多操作 <i class="anticon anticon-down"></i>
+                  </a>
+                  <ul nz-menu>
+                    <li nz-menu-item>
+                      <a target="_blank" rel="noopener noreferrer" href="/">编辑</a>
+                    </li>
+                    <li nz-menu-item>
+                      <a target="_blank" rel="noopener noreferrer" href="/">复制</a>
+                    </li>
+                    <li nz-menu-item>
+                      <a target="_blank" rel="noopener noreferrer" href="/">授权</a>
+                    </li>
+                  </ul>
+                </nz-dropdown>
+              </span>
+          </td>
+        </tr>
+      </tbody>
+      <span nz-table-footer>总共10条数据<1-10></span>
+    </nz-table>
+  </div>
 
 </div>

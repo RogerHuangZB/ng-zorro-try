@@ -3,3 +3,9 @@
   width: 100%;
   padding: 7px;
 }
+
+.datatable-cont {
+  width: 100%;
+  padding: 10px 30px;
+  overflow: auto;
+}

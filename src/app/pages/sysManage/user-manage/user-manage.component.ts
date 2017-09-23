@@ -33,7 +33,16 @@ export class UserManageComponent implements OnInit {
         name       : 'John Brown',
         age        : `${i}`,
         address    : `New York No. ${i} Lake Park`,
-        description: `My name is John Brown, I am ${i} years old, living in New York No. ${i} Lake Park.`,
+        // description: `My name is John Brown, I am ${i} years old, living in New York No. ${i} Lake Park.`,
+        description1: `My name is `,
+        description2: `John Brown, `,
+        description3: `I am `,
+        description4: `${i} years old, `,
+        description5: `living in `,
+        description6: `New York `,
+        description7: `No. ${i} `,
+        description8: `Lake Park.`,
+        description9: ` ${i} ${i} ${i} `,
       });
     }
   }

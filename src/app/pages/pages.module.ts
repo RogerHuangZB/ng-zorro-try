@@ -8,9 +8,9 @@ import { Login } from './login/login.component';
 import { BaPageTopComponent } from './components/ba-page-top/ba-page-top.component';
 import { BaMenuBarComponent } from './components/ba-menu-bar/ba-menu-bar.component';
 import { BaTabBarComponent } from './components/ba-tab-bar/ba-tab-bar.component';
-import {NgZorroAntdModule} from "ng-zorro-antd/src/release/ng-zorro-antd.module";
 import {importComs} from "./comsMgr";
 import {BaTabBarService} from "./components/ba-tab-bar/ba-tab-bar.service";
+import {NgZorroAntdModule} from "ng-zorro-antd";
 
 @NgModule({
   imports: [
