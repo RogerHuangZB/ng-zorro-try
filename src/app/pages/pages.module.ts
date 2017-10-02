@@ -11,6 +11,9 @@ import { BaTabBarComponent } from './components/ba-tab-bar/ba-tab-bar.component'
 import {importComs} from "./comsMgr";
 import {BaTabBarService} from "./components/ba-tab-bar/ba-tab-bar.service";
 import {NgZorroAntdModule} from "ng-zorro-antd";
+import { JcManageComponent } from './ddjc/jc-manage/jc-manage.component';
+import { JcBrandManageComponent } from './ddjc/jc-brand-manage/jc-brand-manage.component';
+import { JcTypeManageComponent } from './ddjc/jc-type-manage/jc-type-manage.component';
 
 @NgModule({
   imports: [
@@ -30,6 +33,9 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
     BaMenuBarComponent,
     BaTabBarComponent,
     ...importComs,
+    JcManageComponent,
+    JcBrandManageComponent,
+    JcTypeManageComponent,
   ],
   providers: [
     BaTabBarService

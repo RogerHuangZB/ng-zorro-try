@@ -33,8 +33,8 @@ export class BaTabBarComponent implements OnInit {
   selectedIndex: number = 0;
 
   homeTab:TabModel = {
-    name: '用户管理',
-    comId: 'UserManageComponent'
+    name: '机床管理',
+    comId: 'JcManageComponent'
   };
 
   constructor(

@@ -1,21 +1,22 @@
 
 <div class="menu-bar">
   <ul nz-menu [nzMode]="'inline'" style="width: 100%;" [nzTheme]="theme?'dark':'light'">
-    <li nz-submenu>
-      <span title><i class="anticon anticon-appstore"></i> Navigation </span>
+    <li nz-submenu [nzOpen]="true">
+      <span title><i class="anticon anticon-appstore"></i> 机床 </span>
       <ul>
-        <li nz-menu-item>Option 5</li>
-        <li nz-menu-item>Option 6</li>
-        <li nz-submenu>
-          <span title>Submenu</span>
-          <ul>
-            <li nz-menu-item>Option 7</li>
-            <li nz-menu-item>Option 8</li>
-          </ul>
-        </li>
+        <li nz-menu-item (click)="addTab('JcManageComponent')">机床管理</li>
+        <li nz-menu-item (click)="addTab('JcTypeManageComponent')">机床类型</li>
+        <li nz-menu-item (click)="addTab('JcBrandManageComponent')">机床品牌</li>
+        <!--<li nz-submenu>-->
+          <!--<span title>Submenu</span>-->
+          <!--<ul>-->
+            <!--<li nz-menu-item>Option 7</li>-->
+            <!--<li nz-menu-item>Option 8</li>-->
+          <!--</ul>-->
+        <!--</li>-->
       </ul>
     </li>
-    <li nz-submenu [nzOpen]="true">
+    <li nz-submenu>
       <span title><i class="anticon anticon-setting"></i>系统管理</span>
       <ul>
         <li nz-menu-item (click)="addTab('TestComponent')">测试</li>
