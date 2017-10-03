@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {HttpModule} from "@angular/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Pages} from "./pages.component";
 import {routing} from "./pages.routing";
 import { Login } from './login/login.component';
@@ -19,6 +19,7 @@ import { JcTypeManageComponent } from './ddjc/jc-type-manage/jc-type-manage.comp
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     routing,
     NgZorroAntdModule

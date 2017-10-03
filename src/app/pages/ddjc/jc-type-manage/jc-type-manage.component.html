@@ -1,3 +1,108 @@
-<p>
-  jc-type-manage works!
-</p>
+<div class="form-cont">
+  <form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="40">
+      <div nz-col [nzSpan]="8">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label [attr.for]="'typeNameId'">类型名称</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="19">
+            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'类型名称'" [formControlName]="'typeName'" [nzId]="'typeNameId'"></nz-input>
+          </div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label [attr.for]="'ftypeNameId'">父类型名</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="19">
+            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'父类型名'" [formControlName]="'ftypeName'" [nzId]="'ftypeNameId'"></nz-input>
+          </div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="8">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label [attr.for]="'remarkId'">备注</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="19">
+            <nz-input [nzSize]="'large'" [nzPlaceHolder]="'备注'" [formControlName]="'remark'" [nzId]="'remarkId'"></nz-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col [nzSpan]="24" style="text-align: right;">
+        <button nz-button [nzType]="'primary'" (click)="search()">查询</button>
+        <button nz-button (click)="resetForm()">重置</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="table-cont">
+  <nz-table
+    #nzTable
+    [nzScroll]="_fixHeader?{ y: 320 }:null"
+    [nzDataSource]="_dataSet"
+    [nzPageSize]="10"
+    [nzBordered]="_bordered"
+    [nzLoading]="_loading"
+    [nzIsPagination]="_pagination"
+    [nzShowFooter]="_footer"
+    [nzShowTitle]="_title"
+    [nzSize]="_size">
+    <span nz-table-title>Here is Title</span>
+    <ng-template #nzFixedHeader [ngIf]="_header&&!_fixHeader">
+      <thead nz-thead>
+      <tr>
+        <th nz-th [nzWidth]="'60px'"><span>tid</span></th>
+        <th nz-th [nzWidth]="'100px'"><span>类型名</span></th>
+        <th nz-th [nzWidth]="'60px'"><span>fid</span></th>
+        <th nz-th [nzWidth]="'100px'"><span>父类型名</span></th>
+        <th nz-th [nzWidth]="'200px'"><span>备注</span></th>
+        <th nz-th [nzWidth]="'60px'"><span>排序</span></th>
+        <th nz-th [nzWidth]="'60px'"><span>有效性</span></th>
+        <th nz-th><span>操作</span></th>
+      </tr>
+      </thead>
+    </ng-template>
+    <tbody nz-tbody>
+    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+      <td nz-td>{{data.tid}}</td>
+      <td nz-td>{{data.tname}}</td>
+      <td nz-td>{{data.tpid}}</td>
+      <td nz-td>{{data.ftname}}</td>
+      <td nz-td>{{data.remark}}</td>
+      <td nz-td>{{data.sort_no}}</td>
+      <td nz-td>{{data.validity}}</td>
+      <td nz-td>
+            <span>
+              <a href="#">编辑 一 {{data.tname}}</a>
+              <span nz-table-divider></span>
+              <a href="#">删除</a>
+              <span nz-table-divider></span>
+              <nz-dropdown>
+                <a class="ant-dropdown-link" nz-dropdown>
+                  更多操作 <i class="anticon anticon-down"></i>
+                </a>
+                <ul nz-menu>
+                  <li nz-menu-item>
+                    <a target="_blank" rel="noopener noreferrer">1st menu item</a>
+                  </li>
+                  <li nz-menu-item>
+                    <a target="_blank" rel="noopener noreferrer">2nd menu item</a>
+                  </li>
+                  <li nz-menu-item>
+                    <a target="_blank" rel="noopener noreferrer">3rd menu item</a>
+                  </li>
+                </ul>
+              </nz-dropdown>
+            </span>
+      </td>
+    </tr>
+    </tbody>
+    <span nz-table-footer>Here is footer</span>
+  </nz-table>
+</div>
