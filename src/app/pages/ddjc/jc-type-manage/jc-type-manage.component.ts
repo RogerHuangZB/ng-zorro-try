@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {NzModalService} from "ng-zorro-antd";
+import {JcTypeManageService} from "./jc-type-manage.service";
+import {Page} from "../../models/page.model";
+import {JcTypeList} from "./jc-type.model";
 
 @Component({
   selector: 'app-jc-type-manage',
@@ -8,6 +11,12 @@ import {NzModalService} from "ng-zorro-antd";
   styleUrls: ['./jc-type-manage.component.css']
 })
 export class JcTypeManageComponent implements OnInit {
+
+  page = new Page();
+  sort: string = 'tid';
+  order: string = 'asc';
+
+  tableDataList: JcTypeList;
 
   searchForm: FormGroup;
   editForm: FormGroup;
@@ -31,7 +40,20 @@ export class JcTypeManageComponent implements OnInit {
   }
 
   search() {
+    this._loading = true;
     console.log(this.searchForm.value);
+    this.jcTypeManageService.dataList(
+      this.page.pageNumber,
+      this.page.size,
+      this.sort,
+      this.order,
+      this.searchForm.value
+    ).then((res)=>{
+      this._loading = false;
+      this.tableDataList = res;
+      this.page.totalElements = this.tableDataList.total;
+      this._dataSet = this.tableDataList.rows;
+    });
   }
 
   isEditVisible = false;
@@ -88,7 +110,7 @@ export class JcTypeManageComponent implements OnInit {
   showDeleteConfirm = (data) => {
     this.confirmServ.confirm({
       title  : '您是否确认要删除这项内容',
-      content: '<b>一些解释</b>',
+      content: '<b>'+ data.tname +'</b>',
       onOk() {
         console.log('确定');
       },
@@ -99,7 +121,8 @@ export class JcTypeManageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private confirmServ: NzModalService
+    private confirmServ: NzModalService,
+    private jcTypeManageService: JcTypeManageService
   ) {
   }
 

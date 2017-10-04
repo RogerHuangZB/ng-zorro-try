@@ -14,6 +14,8 @@ import {NgZorroAntdModule} from "ng-zorro-antd";
 import { JcManageComponent } from './ddjc/jc-manage/jc-manage.component';
 import { JcBrandManageComponent } from './ddjc/jc-brand-manage/jc-brand-manage.component';
 import { JcTypeManageComponent } from './ddjc/jc-type-manage/jc-type-manage.component';
+import {JcTypeManageService} from "./ddjc/jc-type-manage/jc-type-manage.service";
+import {PagesService} from "./pages.service";
 
 @NgModule({
   imports: [
@@ -39,7 +41,9 @@ import { JcTypeManageComponent } from './ddjc/jc-type-manage/jc-type-manage.comp
     JcTypeManageComponent,
   ],
   providers: [
-    BaTabBarService
+    PagesService,
+    BaTabBarService,
+    JcTypeManageService
   ]
 })
 
