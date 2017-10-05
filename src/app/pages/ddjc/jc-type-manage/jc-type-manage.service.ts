@@ -26,9 +26,9 @@ export class JcTypeManageService {
       body += "&typeName="+searchForm.typeName;
     }
 
-    if((!isNullOrUndefined(searchForm.ftypeName))&&searchForm.ftypeName!==''){
-      body += "&typePid="+searchForm.ftypeName;
-    }
+    // if((!isNullOrUndefined(searchForm.ftypeName))&&searchForm.ftypeName!==''){
+    //   body += "&typePid="+searchForm.ftypeName;
+    // }
 
     if((!isNullOrUndefined(searchForm.remark))&&searchForm.remark!==''){
       body += "&remark="+searchForm.remark;

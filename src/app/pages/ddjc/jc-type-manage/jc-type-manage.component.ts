@@ -66,9 +66,9 @@ export class JcTypeManageComponent implements OnInit {
     // console.log(data);
     this.editForm.reset();
     this.editForm.setValue({
-      'editTypeName': data.tname,
-      'editFtypeName': data.ftname,
-      'editSortNo': data.sort_no,
+      'editTypeName': data.typeName,
+      'editFtypeName': data.typePid,
+      'editSortNo': data.sortNo,
       'editRemark': data.remark,
       'editValidity': data.validity
     });
@@ -110,7 +110,7 @@ export class JcTypeManageComponent implements OnInit {
   showDeleteConfirm = (data) => {
     this.confirmServ.confirm({
       title  : '您是否确认要删除这项内容',
-      content: '<b>'+ data.tname +'</b>',
+      content: '<b>'+ data.typeName +'</b>',
       onOk() {
         console.log('确定');
       },
@@ -149,17 +149,17 @@ export class JcTypeManageComponent implements OnInit {
       'addValidity': new FormControl()
     });
 
-    for (let i = 1; i <= 20; i++) {
-      this._dataSet.push({
-        tid        : i,
-        tname       : 'John Brown',
-        tpid        : `${i}2`,
-        ftname       : 'John Brown',
-        remark    : `New York No. ${i} Lake Park`,
-        sort_no : i,
-        validity : i
-      });
-    }
+    // for (let i = 1; i <= 20; i++) {
+    //   this._dataSet.push({
+    //     tid        : i,
+    //     tname       : 'John Brown',
+    //     tpid        : `${i}2`,
+    //     ftname       : 'John Brown',
+    //     remark    : `New York No. ${i} Lake Park`,
+    //     sort_no : i,
+    //     validity : i
+    //   });
+    // }
   }
 
 }
