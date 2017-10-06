@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {NzModalService} from "ng-zorro-antd";
 import {JcTypeManageService} from "./jc-type-manage.service";
-import {Page} from "../../models/page.model";
-import {JcTypeList, JcTypeModel} from "./jc-type.model";
+import {JcTypeList, JcTypeModel} from "../models/jc-type.model";
 
 @Component({
   selector: 'app-jc-type-manage',
@@ -12,7 +11,6 @@ import {JcTypeList, JcTypeModel} from "./jc-type.model";
 })
 export class JcTypeManageComponent implements OnInit {
 
-  page = new Page();
   sort: string = 'sort_no';
   order: string = 'asc';
 
@@ -41,6 +39,7 @@ export class JcTypeManageComponent implements OnInit {
 
   resetForm() {
     this.searchForm.reset();
+    this.search('resetForm');
   }
 
   search(type:string) {

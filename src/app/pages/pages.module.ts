@@ -16,6 +16,7 @@ import { JcBrandManageComponent } from './ddjc/jc-brand-manage/jc-brand-manage.c
 import { JcTypeManageComponent } from './ddjc/jc-type-manage/jc-type-manage.component';
 import {JcTypeManageService} from "./ddjc/jc-type-manage/jc-type-manage.service";
 import {PagesService} from "./pages.service";
+import {JcBrandManageService} from "./ddjc/jc-brand-manage/jc-brand-manage.service";
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import {PagesService} from "./pages.service";
   providers: [
     PagesService,
     BaTabBarService,
-    JcTypeManageService
+    JcTypeManageService,
+    JcBrandManageService
   ]
 })
 
