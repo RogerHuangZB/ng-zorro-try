@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {NzModalService} from "ng-zorro-antd";
 import {JcTypeManageService} from "./jc-type-manage.service";
 import {Page} from "../../models/page.model";
-import {JcTypeList} from "./jc-type.model";
+import {JcTypeList, JcTypeModel} from "./jc-type.model";
 
 @Component({
   selector: 'app-jc-type-manage',
@@ -13,7 +13,7 @@ import {JcTypeList} from "./jc-type.model";
 export class JcTypeManageComponent implements OnInit {
 
   page = new Page();
-  sort: string = 'tid';
+  sort: string = 'sort_no';
   order: string = 'asc';
 
   tableDataList: JcTypeList;
@@ -32,6 +32,10 @@ export class JcTypeManageComponent implements OnInit {
   _fixHeader = true;
   _size = 'small';
 
+  _current = 1;
+  _pageSize = 10;
+  _total = 1;
+
   editData = null;
   addData = null;
 
@@ -39,19 +43,20 @@ export class JcTypeManageComponent implements OnInit {
     this.searchForm.reset();
   }
 
-  search() {
+  search(type:string) {
+    console.log(type);
     this._loading = true;
-    console.log(this.searchForm.value);
+    // console.log(this.searchForm.value);
     this.jcTypeManageService.dataList(
-      this.page.pageNumber,
-      this.page.size,
+      this._current,
+      this._pageSize,
       this.sort,
       this.order,
       this.searchForm.value
     ).then((res)=>{
       this._loading = false;
       this.tableDataList = res;
-      this.page.totalElements = this.tableDataList.total;
+      this._total = this.tableDataList.total;
       this._dataSet = this.tableDataList.rows;
     });
   }
@@ -66,8 +71,9 @@ export class JcTypeManageComponent implements OnInit {
     // console.log(data);
     this.editForm.reset();
     this.editForm.setValue({
+      'editTypeId': data.typeId,
       'editTypeName': data.typeName,
-      'editFtypeName': data.typePid,
+      // 'editFtypeName': data.typePid,
       'editSortNo': data.sortNo,
       'editRemark': data.remark,
       'editValidity': data.validity
@@ -77,11 +83,24 @@ export class JcTypeManageComponent implements OnInit {
 
   editOk = (e) => {
     this.isEditConfirmLoading = true;
-    console.log(this.editForm.value);
-    setTimeout(() => {
-      this.isEditVisible = false;
-      this.isEditConfirmLoading = false;
-    }, 3000);
+    // console.log(e);
+    // console.log(this.editForm.value);
+    let editRow = {
+      typeId: this.editForm.value.editTypeId,
+      typeName: this.editForm.value.editTypeName,
+      sortNo: this.editForm.value.editSortNo,
+      remark: this.editForm.value.editRemark,
+      validity: this.editForm.value.editValidity,
+    };
+    this.jcTypeManageService.editRow(editRow)
+      .then((res:any) => {
+        this.isEditConfirmLoading = false;
+        // console.log(res);
+        if(res.code === 'ok'){
+          this.isEditVisible = false;
+          this.search('editOk');
+        }
+      });
   };
 
   editCancel = (e) => {
@@ -90,16 +109,35 @@ export class JcTypeManageComponent implements OnInit {
   };
 
   showAddModal = () =>{
+    this.addForm.reset();
+    this.addForm.setValue({
+      'addTypeName': '',
+      'addSortNo': 1,
+      'addRemark': '',
+      'addValidity': 0
+    });
     this.isAddVisible = true;
   };
 
   addOk = (e) => {
     this.isAddConfirmLoading = true;
-    console.log(this.addData);
-    setTimeout(() => {
-      this.isAddVisible = false;
-      this.isAddConfirmLoading = false;
-    }, 3000);
+    // console.log(e);
+    // console.log(this.addForm.value);
+    let addRow = {
+      typeName: this.addForm.value.addTypeName,
+      sortNo: this.addForm.value.addSortNo,
+      remark: this.addForm.value.addRemark,
+      validity: this.addForm.value.addValidity,
+    };
+    this.jcTypeManageService.addRow(addRow)
+      .then((res:any) => {
+        // console.log(res);
+        this.isAddConfirmLoading = false;
+        if(res.code === 'ok'){
+          this.isAddVisible = false;
+          this.search('addOk');
+        }
+      });
   };
 
   addCancel = (e) => {
@@ -108,11 +146,17 @@ export class JcTypeManageComponent implements OnInit {
   };
 
   showDeleteConfirm = (data) => {
-    this.confirmServ.confirm({
-      title  : '您是否确认要删除这项内容',
+    let that = this;
+    that.confirmServ.confirm({
+      title  : '您是否确认要删除该数据？',
       content: '<b>'+ data.typeName +'</b>',
       onOk() {
-        console.log('确定');
+        // console.log(data.typeId);
+        that.jcTypeManageService.deleteRow(data.typeId)
+          .then((res:any) => {
+            // console.log(res);
+            that.search('delete');
+          });
       },
       onCancel() {
       }
@@ -127,6 +171,7 @@ export class JcTypeManageComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("JcTypeManageComponent ngOnInit.");
     this.searchForm = this.fb.group({
       'typeName': new FormControl(),
       'ftypeName': new FormControl(),
@@ -134,8 +179,9 @@ export class JcTypeManageComponent implements OnInit {
     });
 
     this.editForm = this.fb.group({
+      'editTypeId': new FormControl(),
       'editTypeName': new FormControl(),
-      'editFtypeName': new FormControl(),
+      // 'editFtypeName': new FormControl(),
       'editSortNo': new FormControl(),
       'editRemark': new FormControl(),
       'editValidity': new FormControl()
@@ -143,23 +189,13 @@ export class JcTypeManageComponent implements OnInit {
 
     this.addForm = this.fb.group({
       'addTypeName': new FormControl(),
-      'addFtypeName': new FormControl(),
+      // 'addFtypeName': new FormControl(),
       'addSortNo': new FormControl(),
       'addRemark': new FormControl(),
       'addValidity': new FormControl()
     });
 
-    // for (let i = 1; i <= 20; i++) {
-    //   this._dataSet.push({
-    //     tid        : i,
-    //     tname       : 'John Brown',
-    //     tpid        : `${i}2`,
-    //     ftname       : 'John Brown',
-    //     remark    : `New York No. ${i} Lake Park`,
-    //     sort_no : i,
-    //     validity : i
-    //   });
-    // }
+    this.search('ngOnInit');
   }
 
 }

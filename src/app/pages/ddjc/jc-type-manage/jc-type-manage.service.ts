@@ -44,6 +44,51 @@ export class JcTypeManageService {
         return Observable.throw(error);
       });
   }
+  /*新增*/
+  addRow(row:any):Promise<any>{
+    let postUrl = this.apiUrl + "jcType/add";
+    let body = "typeName="+row.typeName
+      // +"&typePid="+row.typePid
+      +"&remark="+row.remark
+      +"&sortNo="+row.sortNo
+      +"&validity="+row.validity;
+
+    return this.http.post(postUrl, body, {
+      headers: this.headers
+    }).toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
+  /*删除*/
+  deleteRow(rowId: number):Promise<any>{
+    let postUrl = this.apiUrl + "jcType/delete";
+    let resjson:any = null;
+    let body = 'typeId=' + rowId;
+    return this.http.post(postUrl, body, {
+      headers: this.headers
+    }).toPromise()
+      .then(response => {
+        resjson = response.json();
+        return resjson;
+      });
+  }
+
+  /*编辑*/
+  editRow(row:any): Promise<any> {
+    let postUrl = this.apiUrl + "jcType/edit";
+    let body = "typeId="+row.typeId
+      +"&typeName="+row.typeName
+      +"&remark="+row.remark
+      +"&sortNo="+row.sortNo
+      +"&validity="+row.validity;
+
+    return this.http.post(postUrl, body, {
+      headers: this.headers
+    }).toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
 
   private extractData(res: Response) {
     let body = res.json();

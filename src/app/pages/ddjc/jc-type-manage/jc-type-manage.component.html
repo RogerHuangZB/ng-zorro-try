@@ -15,19 +15,19 @@
           </div>
         </div>
       </div>
-      <div nz-col [nzSpan]="8">
-        <div nz-form-item nz-row>
-          <div nz-form-label nz-col [nzSpan]="5">
-            <label [attr.for]="'ftypeNameId'">父类型名</label>
-          </div>
-          <div nz-form-control nz-col [nzSpan]="19">
-            <nz-input [nzSize]="'large'"
-                      [nzPlaceHolder]="'父类型名'"
-                      [formControlName]="'ftypeName'"
-                      [nzId]="'ftypeNameId'"></nz-input>
-          </div>
-        </div>
-      </div>
+      <!--<div nz-col [nzSpan]="8">-->
+        <!--<div nz-form-item nz-row>-->
+          <!--<div nz-form-label nz-col [nzSpan]="5">-->
+            <!--<label [attr.for]="'ftypeNameId'">父类型名</label>-->
+          <!--</div>-->
+          <!--<div nz-form-control nz-col [nzSpan]="19">-->
+            <!--<nz-input [nzSize]="'large'"-->
+                      <!--[nzPlaceHolder]="'父类型名'"-->
+                      <!--[formControlName]="'ftypeName'"-->
+                      <!--[nzId]="'ftypeNameId'"></nz-input>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
       <div nz-col [nzSpan]="8">
         <div nz-form-item nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
@@ -47,7 +47,7 @@
         <button nz-button [nzType]="'default'"
                 (click)="showAddModal()">新增</button>
         <button nz-button [nzType]="'primary'"
-                (click)="search()">查询</button>
+                (click)="search('search')">查询</button>
         <button nz-button [nzType]="'dashed'"
                 (click)="resetForm()">重置</button>
       </div>
@@ -59,11 +59,15 @@
   <nz-table
     #nzTable
     [nzScroll]="_fixHeader?{ y: 320 }:null"
-    [nzDataSource]="_dataSet"
-    [nzPageSize]="10"
+    [nzAjaxData]="_dataSet"
     [nzBordered]="_bordered"
     [nzLoading]="_loading"
     [nzIsPagination]="_pagination"
+    [nzTotal]="_total"
+    [(nzPageIndex)]="_current"
+    (nzPageIndexChange)="search('index')"
+    [nzPageSize]="_pageSize"
+    (nzPageSizeChange)="search('size')"
     [nzShowFooter]="_footer"
     [nzShowTitle]="_title"
     [nzSize]="_size">
@@ -73,8 +77,8 @@
       <tr>
         <th nz-th [nzWidth]="'60px'"><span>tid</span></th>
         <th nz-th [nzWidth]="'100px'"><span>类型名</span></th>
-        <th nz-th [nzWidth]="'60px'"><span>fid</span></th>
-        <th nz-th [nzWidth]="'100px'"><span>父类型名</span></th>
+        <!--<th nz-th [nzWidth]="'60px'"><span>fid</span></th>-->
+        <!--<th nz-th [nzWidth]="'100px'"><span>父类型名</span></th>-->
         <th nz-th [nzWidth]="'200px'"><span>备注</span></th>
         <th nz-th [nzWidth]="'60px'"><span>排序</span></th>
         <th nz-th [nzWidth]="'60px'"><span>有效性</span></th>
@@ -86,8 +90,8 @@
     <tr nz-tbody-tr *ngFor="let data of nzTable.data">
       <td nz-td>{{data.typeId}}</td>
       <td nz-td>{{data.typeName}}</td>
-      <td nz-td>{{data.typePid}}</td>
-      <td nz-td>{{data.typePname}}</td>
+      <!--<td nz-td>{{data.typePid}}</td>-->
+      <!--<td nz-td>{{data.typePname}}</td>-->
       <td nz-td>{{data.remark}}</td>
       <td nz-td>{{data.sortNo}}</td>
       <td nz-td>{{data.validity}}</td>
@@ -95,7 +99,7 @@
           <span>
               <a (click)="showEditModal(data)">编辑 一 {{data.typeName}}</a>
               <span nz-table-divider></span>
-              <a href="#" (click)="showDeleteConfirm(data)">删除</a>
+              <a href="#" (click)="showDeleteConfirm(data)">删除 一 {{data.typeName}}</a>
               <!--<span nz-table-divider></span>-->
               <!--<nz-dropdown>-->
                 <!--<a class="ant-dropdown-link" nz-dropdown>-->
@@ -149,19 +153,19 @@
             </div>
           </div>
         </div>
-        <div nz-col [nzSpan]="12">
-          <div nz-form-item nz-row>
-            <div nz-form-label nz-col [nzSpan]="7">
-              <label [attr.for]="'editFtypeNameId'">父类型</label>
-            </div>
-            <div nz-form-control nz-col [nzSpan]="17">
-              <nz-input [nzSize]="'large'"
-                        [nzPlaceHolder]="'父类型'"
-                        [formControlName]="'editFtypeName'"
-                        [nzId]="'editFtypeNameId'"></nz-input>
-            </div>
-          </div>
-        </div>
+        <!--<div nz-col [nzSpan]="12">-->
+          <!--<div nz-form-item nz-row>-->
+            <!--<div nz-form-label nz-col [nzSpan]="7">-->
+              <!--<label [attr.for]="'editFtypeNameId'">父类型</label>-->
+            <!--</div>-->
+            <!--<div nz-form-control nz-col [nzSpan]="17">-->
+              <!--<nz-input [nzSize]="'large'"-->
+                        <!--[nzPlaceHolder]="'父类型'"-->
+                        <!--[formControlName]="'editFtypeName'"-->
+                        <!--[nzId]="'editFtypeNameId'"></nz-input>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
       <div nz-row [nzGutter]="20">
         <div nz-col [nzSpan]="12">
@@ -172,8 +176,7 @@
             <div nz-form-control nz-col [nzSpan]="17">
               <nz-input-number [formControlName]="'editSortNo'"
                                [nzSize]="'large'"
-                               [nzMin]="1" [nzMax]="10"
-                               [nzStep]="1"></nz-input-number>
+                               [nzMin]="1" [nzStep]="1"></nz-input-number>
             </div>
           </div>
         </div>
@@ -246,19 +249,19 @@
             </div>
           </div>
         </div>
-        <div nz-col [nzSpan]="12">
-          <div nz-form-item nz-row>
-            <div nz-form-label nz-col [nzSpan]="7">
-              <label [attr.for]="'addFtypeNameId'">父类型</label>
-            </div>
-            <div nz-form-control nz-col [nzSpan]="17">
-              <nz-input [nzSize]="'large'"
-                        [nzPlaceHolder]="'父类型'"
-                        [formControlName]="'addFtypeName'"
-                        [nzId]="'addFtypeNameId'"></nz-input>
-            </div>
-          </div>
-        </div>
+        <!--<div nz-col [nzSpan]="12">-->
+          <!--<div nz-form-item nz-row>-->
+            <!--<div nz-form-label nz-col [nzSpan]="7">-->
+              <!--<label [attr.for]="'addFtypeNameId'">父类型</label>-->
+            <!--</div>-->
+            <!--<div nz-form-control nz-col [nzSpan]="17">-->
+              <!--<nz-input [nzSize]="'large'"-->
+                        <!--[nzPlaceHolder]="'父类型'"-->
+                        <!--[formControlName]="'addFtypeName'"-->
+                        <!--[nzId]="'addFtypeNameId'"></nz-input>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
       <div nz-row [nzGutter]="20">
         <div nz-col [nzSpan]="12">
