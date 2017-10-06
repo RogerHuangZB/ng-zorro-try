@@ -34,7 +34,7 @@ export class JcTypeManageComponent implements OnInit {
 
   _current = 1;
   _pageSize = 10;
-  _total = 1;
+  _total = 0;
 
   editData = null;
   addData = null;
@@ -199,3 +199,12 @@ export class JcTypeManageComponent implements OnInit {
   }
 
 }
+
+/*
+  table里的数据删除的时候有一个隐藏BUG，
+  最后一页的数据全部删除的时候，页面会显示无数据，
+  无法自动跳转到有数据的前一页，
+  并且，分页组件消失。
+  应该是当前页码的数据没有了，但是页码还是在当页，
+  因此向后台查询数据无返回
+*/
