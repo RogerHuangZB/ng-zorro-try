@@ -34,9 +34,6 @@ export class JcBrandManageComponent implements OnInit {
   _pageSize = 10;
   _total = 0;
 
-  editData = null;
-  addData = null;
-
   resetForm() {
     this.searchForm.reset();
     this.search('resetForm');
@@ -108,7 +105,6 @@ export class JcBrandManageComponent implements OnInit {
   };
 
   editCancel = (e) => {
-    this.editData = null;
     this.isEditVisible = false;
   };
 
@@ -151,7 +147,6 @@ export class JcBrandManageComponent implements OnInit {
   };
 
   addCancel = (e) => {
-    this.addData = null;
     this.isAddVisible = false;
   };
 

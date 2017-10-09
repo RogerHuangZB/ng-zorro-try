@@ -32,14 +32,9 @@ export class BaTabBarComponent implements OnInit {
   tabs: TabModel[] = [];
   selectedIndex: number = 0;
 
-  // homeTab:TabModel = {
-  //   name: '机床管理',
-  //   comId: 'JcManageComponent'
-  // };
-
   homeTab:TabModel = {
-    name: '机床类型',
-    comId: 'JcTypeManageComponent'
+    name: '机床管理',
+    comId: 'JcManageComponent'
   };
 
   constructor(
