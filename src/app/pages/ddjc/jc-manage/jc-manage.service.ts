@@ -47,8 +47,20 @@ export class JcManageService {
   /*新增*/
   addRow(row:any):Promise<any>{
     let postUrl = this.apiUrl + "jc/add";
-    let body = "typeName="+row.typeName
-      // +"&typePid="+row.typePid
+    let body = "jcName="+row.jcName
+      +"&jcTypeId="+row.jcTypeId
+      +"&jcBrandId="+row.jcBrandId
+      +"&origin="+row.origin
+      +"&productTimeStr="+row.productTimeStr
+      +"&usedMonth="+row.usedMonth
+      +"&isSale="+row.isSale
+      +"&price="+row.price
+      +"&jcModelNo="+row.jcModelNo
+      +"&feature01="+row.feature01
+      +"&feature02="+row.feature02
+      +"&feature03="+row.feature03
+      +"&feature04="+row.feature04
+      +"&feature05="+row.feature05
       +"&remark="+row.remark
       +"&sortNo="+row.sortNo
       +"&validity="+row.validity;
@@ -64,7 +76,7 @@ export class JcManageService {
   deleteRow(rowId: number):Promise<any>{
     let postUrl = this.apiUrl + "jc/delete";
     let resjson:any = null;
-    let body = 'typeId=' + rowId;
+    let body = 'jcId=' + rowId;
     return this.http.post(postUrl, body, {
       headers: this.headers
     }).toPromise()
@@ -77,8 +89,21 @@ export class JcManageService {
   /*编辑*/
   editRow(row:any): Promise<any> {
     let postUrl = this.apiUrl + "jc/edit";
-    let body = "typeId="+row.typeId
-      +"&typeName="+row.typeName
+    let body = "jcId="+row.jcId
+      +"&jcName="+row.jcName
+      +"&jcTypeId="+row.jcTypeId
+      +"&jcBrandId="+row.jcBrandId
+      +"&origin="+row.origin
+      +"&productTimeStr="+row.productTimeStr
+      +"&usedMonth="+row.usedMonth
+      +"&isSale="+row.isSale
+      +"&price="+row.price
+      +"&jcModelNo="+row.jcModelNo
+      +"&feature01="+row.feature01
+      +"&feature02="+row.feature02
+      +"&feature03="+row.feature03
+      +"&feature04="+row.feature04
+      +"&feature05="+row.feature05
       +"&remark="+row.remark
       +"&sortNo="+row.sortNo
       +"&validity="+row.validity;

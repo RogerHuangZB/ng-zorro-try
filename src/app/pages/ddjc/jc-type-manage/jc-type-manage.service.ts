@@ -18,6 +18,20 @@ export class JcTypeManageService {
     this.headers = this.pagesService.getHeaders();
   }
 
+  dataAll(): Promise<any>{
+    let postUrl = this.apiUrl + "jcType/dataAll";
+    let body = '';
+    return this.http.post(postUrl, body, {
+      headers: this.headers
+    }).toPromise()
+      .then(this.extractData)
+      .catch((error: Response) => {
+        console.log(error.json());
+        this.pagesService.httpErrorHandle(error.json());
+        return Observable.throw(error);
+      });
+  }
+
   dataList(page:number, rows:number, sort:string, order:string, searchForm:any): Promise<any> {
     let postUrl = this.apiUrl + "jcType/dataGrid";
     let body = "page="+page+"&rows="+rows+"&sort="+sort+"&order="+order;

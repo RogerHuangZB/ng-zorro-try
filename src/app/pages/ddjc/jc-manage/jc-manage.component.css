@@ -4,9 +4,23 @@
   padding: 5px 10px 0 10px;
 }
 
+.ant-row.ant-form-item {
+  margin-bottom: 8px;
+}
+
 .ant-advanced-search-form {
   padding: 14px;
   background: #fbfbfb;
   border: 1px solid #d9d9d9;
   border-radius: 6px;
+}
+
+:host ::ng-deep .vertical-center-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .vertical-center-modal .ant-modal {
+  top: 0;
 }
