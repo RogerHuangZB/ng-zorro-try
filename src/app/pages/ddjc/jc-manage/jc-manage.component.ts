@@ -40,6 +40,13 @@ export class JcManageComponent implements OnInit {
   jcTypes = [];
   jcBrands = [];
 
+  pic1_url = '';
+  pic2_url = '';
+  pic3_url = '';
+  pic4_url = '';
+  pic5_url = '';
+  pic6_url = '';
+
   resetForm() {
     this.searchForm.reset();
     this.search('resetForm');
@@ -256,6 +263,14 @@ export class JcManageComponent implements OnInit {
     this.jcBrandManageService.dataAll().then((res:any) => {
       this.jcBrands = res;
     });
+
+    this.pic1_url = 'assets/Lamborghini/1448938675281.jpg';
+    this.pic2_url = 'assets/Lamborghini/1448938686114.jpg';
+    this.pic3_url = 'assets/Lamborghini/1448938690221.jpg';
+    this.pic4_url = 'assets/Lamborghini/1448938694372.jpg';
+    this.pic5_url = 'assets/Lamborghini/1448938700943.jpg';
+    this.pic6_url = 'assets/Lamborghini/1448938713618.jpg';
+
   }
 
   ngOnInit() {
