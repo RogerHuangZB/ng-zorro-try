@@ -24,3 +24,33 @@
 :host ::ng-deep .vertical-center-modal .ant-modal {
   top: 0;
 }
+
+.info-form {
+  width: 688px;
+  display: inline-block;
+}
+
+.info-pic-cont {
+  float: right;
+  width: 300px;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.info-pic-cont .pic {
+  position: relative;
+  padding: 2px;
+  display: inline-block;
+  width: 145px;
+  height: 125px;
+}
+
+.info-pic-cont .pic img {
+  width: 100%;
+  max-height: 100%;
+}
+
+.info-form .ant-row.ant-form-item {
+  margin-bottom: 16px;
+}

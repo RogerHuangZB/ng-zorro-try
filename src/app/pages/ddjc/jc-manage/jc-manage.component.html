@@ -1,11 +1,11 @@
 <div class="form-cont">
   <form nz-form [formGroup]="searchForm"
         class="ant-advanced-search-form">
-    <div nz-row [nzGutter]="40">
-      <div nz-col [nzSpan]="8">
+    <div nz-row [nzGutter]="20">
+      <div nz-col [nzSpan]="7">
         <div nz-form-item nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
-            <label [attr.for]="'jcNameId'">机床名称</label>
+            <label [attr.for]="'jcNameId'">机床名</label>
           </div>
           <div nz-form-control nz-col [nzSpan]="19">
             <nz-input [nzSize]="'large'"
@@ -15,29 +15,59 @@
           </div>
         </div>
       </div>
-      <div nz-col [nzSpan]="8">
+      <div nz-col [nzSpan]="4">
         <div nz-form-item nz-row>
-          <div nz-form-label nz-col [nzSpan]="5">
-            <label [attr.for]="'jcTypeId'">机床类型</label>
+          <div nz-form-label nz-col [nzSpan]="6">
+            <label>类型</label>
           </div>
-          <div nz-form-control nz-col [nzSpan]="19">
-            <nz-input [nzSize]="'large'"
-                      [nzPlaceHolder]="'机床类型'"
-                      [formControlName]="'jcType'"
-                      [nzId]="'jcTypeId'"></nz-input>
+          <div nz-form-control nz-col [nzSpan]="18">
+            <nz-select [formControlName]="'jcType'"
+                       nzAllowClear
+                       [nzPlaceHolder]="'选择一个类型'">
+              <nz-option
+                *ngFor="let option of jcTypes"
+                [nzLabel]="option.typeName"
+                [nzValue]="option.typeId">
+              </nz-option>
+            </nz-select>
           </div>
         </div>
       </div>
-      <div nz-col [nzSpan]="8">
+      <div nz-col [nzSpan]="4">
         <div nz-form-item nz-row>
-          <div nz-form-label nz-col [nzSpan]="5">
-            <label [attr.for]="'remarkId'">备注</label>
+          <div nz-form-label nz-col [nzSpan]="6">
+            <label>品牌</label>
           </div>
-          <div nz-form-control nz-col [nzSpan]="19">
-            <nz-input [nzSize]="'large'"
-                      [nzPlaceHolder]="'备注'"
-                      [formControlName]="'remark'"
-                      [nzId]="'remarkId'"></nz-input>
+          <div nz-form-control nz-col [nzSpan]="18">
+            <nz-select [formControlName]="'jcBrand'"
+                       nzAllowClear
+                       [nzPlaceHolder]="'选择一个品牌'">
+              <nz-option
+                *ngFor="let option of jcBrands"
+                [nzLabel]="option.brandName"
+                [nzValue]="option.brandId">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="9">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="4">
+            <label>状态</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="20">
+            <nz-radio-group [formControlName]="'isSale'">
+              <label nz-radio-button [nzValue]="0">
+                <span>出售中</span>
+              </label>
+              <label nz-radio-button [nzValue]="1">
+                <span>未上架</span>
+              </label>
+              <label nz-radio-button [nzValue]="2">
+                <span>已售出</span>
+              </label>
+            </nz-radio-group>
           </div>
         </div>
       </div>
@@ -91,7 +121,7 @@
         <th nz-th [nzWidth]="'120px'"><span>备注</span></th>
         <!--<th nz-th [nzWidth]="'60px'"><span>排序</span></th>-->
         <!--<th nz-th [nzWidth]="'60px'"><span>有效性</span></th>-->
-        <th nz-th><span>操作</span></th>
+        <th nz-th [nzWidth]="'160px'"><span>操作</span></th>
       </tr>
       </thead>
     </ng-template>
@@ -118,7 +148,7 @@
               <span nz-table-divider></span>
               <a (click)="showDeleteConfirm(data)">删除</a>
               <span nz-table-divider></span>
-              <a (click)="showPicModal(data)">图片</a>
+              <a (click)="showPicModal(data)">上传照片</a>
           </span>
       </td>
     </tr>
@@ -681,6 +711,286 @@
     <button nz-button [nzType]="'primary'" [nzSize]="'large'"
             (click)="addOk($event)" [nzLoading]="isAddConfirmLoading">
       提 交
+    </button>
+  </ng-template>
+</nz-modal>
+
+<!--详情-->
+<nz-modal [nzVisible]="isInfoVisible"
+          [nzTitle]="infoTitle"
+          [nzWidth]="1020"
+          [nzWrapClassName]="'vertical-center-modal'"
+          [nzContent]="infoContent"
+          [nzFooter]="infoFooter"
+          (nzOnCancel)="infoCancel($event)">
+  <ng-template #infoTitle>
+    详情
+  </ng-template>
+  <ng-template #infoContent>
+    <form nz-form [formGroup]="infoForm" class="info-form">
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label>机床名称</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'机床名称'"
+                        [formControlName]="'infoJcName'"
+                        [nzId]="'infoJcNameId'"></nz-input>
+            </div>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoJcModelNoId'">机床型号</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'机床型号'"
+                        [formControlName]="'infoJcModelNo'"
+                        [nzId]="'infoJcModelNoId'"></nz-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoJcTypeId'">机床类型</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'机床类型'"
+                        [formControlName]="'infoJcType'"
+                        [nzId]="'infoJcTypeId'"></nz-input>
+            </div>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label>机床品牌</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'选择一个品牌'"
+                        [formControlName]="'infoJcBrand'"
+                        [nzId]="'infoJcBrandId'"></nz-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoOriginId'">原产地</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'原产地'"
+                        [formControlName]="'infoOrigin'"
+                        [nzId]="'infoOriginId'"></nz-input>
+            </div>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label>生产日期</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [formControlName]="'infoProductTime'"
+                        [nzId]="'infoProductTimeId'"></nz-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoUsedMonthId'">使用月数</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'使用月数'"
+                        [formControlName]="'infoUsedMonth'"
+                        [nzId]="'infoUsedMonthId'"></nz-input>
+            </div>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label>状态</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-radio-group [formControlName]="'infoIsSale'">
+                <label nz-radio-button [nzValue]="0" [nzDisabled]="true">
+                  <span>出售中</span>
+                </label>
+                <label nz-radio-button [nzValue]="1" [nzDisabled]="true">
+                  <span>未上架</span>
+                </label>
+                <label nz-radio-button [nzValue]="2" [nzDisabled]="true">
+                  <span>已售出</span>
+                </label>
+              </nz-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoPriceId'">价格</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'价格'"
+                        [formControlName]="'infoPrice'"
+                        [nzId]="'infoPriceId'"></nz-input>
+            </div>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoFeature01Id'">特征参数1</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'特征参数1'"
+                        [formControlName]="'infoFeature01'"
+                        [nzId]="'infoFeature01Id'"></nz-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoFeature02Id'">特征参数2</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'特征参数2'"
+                        [formControlName]="'infoFeature02'"
+                        [nzId]="'infoFeature02Id'"></nz-input>
+            </div>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoFeature03Id'">特征参数3</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'特征参数3'"
+                        [formControlName]="'infoFeature03'"
+                        [nzId]="'infoFeature03Id'"></nz-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoFeature04Id'">特征参数4</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'特征参数4'"
+                        [formControlName]="'infoFeature04'"
+                        [nzId]="'infoFeature04Id'"></nz-input>
+            </div>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="12">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="6">
+              <label [attr.for]="'infoFeature05Id'">特征参数5</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="17">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'特征参数5'"
+                        [formControlName]="'infoFeature05'"
+                        [nzId]="'infoFeature05Id'"></nz-input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div nz-row [nzGutter]="8">
+        <div nz-col [nzSpan]="24">
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="3">
+              <label [attr.for]="'infoRemarkId'">备注</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="21">
+              <nz-input [nzSize]="'large'"
+                        [nzReadonly]="true"
+                        [nzPlaceHolder]="'备注'"
+                        [formControlName]="'infoRemark'"
+                        [nzId]="'infoRemarkId'"></nz-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="info-pic-cont">
+      <div class="pic">
+        <img src="assets/Lamborghini/1448938675281.jpg" alt="机床照片1">
+      </div>
+      <div class="pic">
+        <img src="assets/Lamborghini/1448938686114.jpg" alt="机床照片2">
+      </div>
+      <div class="pic">
+        <img src="assets/Lamborghini/1448938690221.jpg" alt="机床照片3">
+      </div>
+      <div class="pic">
+        <img src="assets/Lamborghini/1448938694372.jpg" alt="机床照片4">
+      </div>
+      <div class="pic">
+        <img src="assets/Lamborghini/1448938700943.jpg" alt="机床照片5">
+      </div>
+      <div class="pic">
+        <img src="assets/Lamborghini/1448938713618.jpg" alt="机床照片6">
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #infoFooter>
+    <button nz-button [nzType]="'default'" [nzSize]="'large'"
+            (click)="infoCancel($event)">
+      返 回
     </button>
   </ng-template>
 </nz-modal>

@@ -26,12 +26,16 @@ export class JcManageService {
       body += "&jcName="+searchForm.jcName;
     }
 
-    if((!isNullOrUndefined(searchForm.jcTypeId))&&searchForm.jcTypeId!==''){
-      body += "&jcTypeId="+searchForm.jcTypeId;
+    if((!isNullOrUndefined(searchForm.jcType))&&searchForm.jcType!==''){
+      body += "&jcTypeId="+searchForm.jcType;
     }
 
-    if((!isNullOrUndefined(searchForm.remark))&&searchForm.remark!==''){
-      body += "&remark="+searchForm.remark;
+    if((!isNullOrUndefined(searchForm.jcBrand))&&searchForm.jcBrand!==''){
+      body += "&jcBrandId="+searchForm.jcBrand;
+    }
+
+    if((!isNullOrUndefined(searchForm.isSale))&&searchForm.isSale!==''){
+      body += "&isSale="+searchForm.isSale;
     }
 
     return this.http.post(postUrl, body, {

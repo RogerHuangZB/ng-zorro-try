@@ -19,6 +19,7 @@ export class JcManageComponent implements OnInit {
   tableDataList: JcList;
 
   searchForm: FormGroup;
+  infoForm: FormGroup;
   editForm: FormGroup;
   addForm: FormGroup;
 
@@ -61,8 +62,8 @@ export class JcManageComponent implements OnInit {
     });
   }
 
-  isInfoModalVisible = false;
-  isInfoModalConfirmLoading = false;
+  isInfoVisible = false;
+  // isInfoConfirmLoading = false;
 
   isEditVisible = false;
   isEditConfirmLoading = false;
@@ -76,11 +77,35 @@ export class JcManageComponent implements OnInit {
   showInfoModal = (data) => {
     console.log(data);
 
-    this.isInfoModalVisible = true;
+    this.infoForm.reset();
+    this.infoForm.setValue({
+      'infoJcId':        data.jcId,
+      'infoJcName':      data.jcName,
+      'infoJcType':      data.jcTypeName,
+      'infoJcBrand':     data.jcBrandName,
+      'infoJcModelNo':   data.jcModelNo,
+      'infoOrigin':      data.origin,
+      'infoProductTime': data.productTime,
+      'infoUsedMonth':   data.usedMonth,
+      'infoIsSale':      data.isSale,
+      'infoPrice':       data.price,
+      'infoFeature01':   data.feature01,
+      'infoFeature02':   data.feature02,
+      'infoFeature03':   data.feature03,
+      'infoFeature04':   data.feature04,
+      'infoFeature05':   data.feature05,
+      'infoRemark':      data.remark,
+      'infoValidity':    data.validity
+    });
+
+    this.isInfoVisible = true;
+  };
+
+  infoCancel = (e) => {
+    this.isInfoVisible = false;
   };
 
   showEditModal = (data) => {
-    // console.log(data);
     this.editForm.reset();
     this.editForm.setValue({
       'editJcId':        data.jcId,
@@ -238,7 +263,8 @@ export class JcManageComponent implements OnInit {
     this.searchForm = this.fb.group({
       'jcName': new FormControl(),
       'jcType': new FormControl(),
-      'remark': new FormControl()
+      'jcBrand': new FormControl(),
+      'isSale': new FormControl()
     });
 
     this.addForm = this.fb.group({
@@ -278,6 +304,26 @@ export class JcManageComponent implements OnInit {
       'editFeature05': new FormControl(),
       'editRemark': new FormControl(),
       'editValidity': new FormControl()
+    });
+
+    this.infoForm = this.fb.group({
+      'infoJcId': new FormControl(),
+      'infoJcName': new FormControl(),
+      'infoJcType': new FormControl(),
+      'infoJcBrand': new FormControl(),
+      'infoJcModelNo': new FormControl(),
+      'infoOrigin': new FormControl(),
+      'infoProductTime': new FormControl(),
+      'infoUsedMonth': new FormControl(),
+      'infoIsSale': new FormControl(),
+      'infoPrice': new FormControl(),
+      'infoFeature01': new FormControl(),
+      'infoFeature02': new FormControl(),
+      'infoFeature03': new FormControl(),
+      'infoFeature04': new FormControl(),
+      'infoFeature05': new FormControl(),
+      'infoRemark': new FormControl(),
+      'infoValidity': new FormControl()
     });
 
     this.search('ngOnInit');
