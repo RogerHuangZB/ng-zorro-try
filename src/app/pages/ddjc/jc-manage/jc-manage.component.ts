@@ -5,6 +5,8 @@ import {JcList} from "../models/jc.model";
 import {JcManageService} from "./jc-manage.service";
 import {JcTypeManageService} from "../jc-type-manage/jc-type-manage.service";
 import {JcBrandManageService} from "../jc-brand-manage/jc-brand-manage.service";
+import { FileUploader } from "ng2-file-upload";
+import {FileHolder, UploadMetadata} from "angular2-image-upload";
 
 @Component({
   selector: 'app-jc-manage',
@@ -78,8 +80,8 @@ export class JcManageComponent implements OnInit {
   isAddVisible = false;
   isAddConfirmLoading = false;
 
-  isPicModalVisible = false;
-  isPicModalConfirmLoading = false;
+  isPicUpModalVisible = false;
+  isPicUpModalConfirmLoading = false;
 
   showInfoModal = (data) => {
     console.log(data);
@@ -247,7 +249,104 @@ export class JcManageComponent implements OnInit {
   };
 
   showPicModal = (data) => {
-    this.isPicModalVisible = true;
+    this.isPicUpModalVisible = true;
+    this.getOSSAcess();
+  };
+
+  key = '';
+  expire = null;
+  accessid = '';
+  accesskey = '';
+  host = '';
+  policyBase64 = '';
+  signature = '';
+  // callbackbody;
+
+  getOSSAcess(){
+    this.jcManageService.jcwPostPolicy()
+      .then((res:any) => {
+        console.log(res);
+        this.key = res.dir + '${filename}';
+        this.expire = parseInt(res.expire);
+        this.accessid = res.accessid;
+        this.host = res.host;
+        this.policyBase64 = res.policy;
+        this.signature = res.signature;
+
+        this.myFormdata = {
+          'key' : this.key,
+          'policy': this.policyBase64,
+          'OSSAccessKeyId': this.accessid,
+          'success_action_status' : '200', //让服务端返回200,不然，默认会返回204
+          // 'callback' : this.callbackbody,
+          'signature': this.signature
+        };
+      });
+  }
+
+  // uploadUrl = '';
+  uploadUrl = 'http://jcw001.oss-cn-shanghai.aliyuncs.com';
+  // uploadUrl = 'http://jcw010.oss-cn-shanghai.aliyuncs.com';
+  myHeaders: { [name: string]: any } = {};
+  myFormdata: { [name: string]: any } = {};
+  picList = [];
+
+  customStyle = {
+    selectButton: {
+      "color": "white",
+      "background-color": "purple",
+    },
+    clearButton: {
+      "color": "white",
+      "background-color": "yellow",
+    },
+    layout: {
+      "background-color": "black",
+      "color": "red",
+      "font-size": "15px",
+    },
+    previewPanel: {
+      "background-color": "red",
+    }
+  };
+
+  onBeforeUpload = (metadata: UploadMetadata) => {
+    console.log(metadata);
+    console.log(metadata.url);
+    console.log(metadata.file);
+
+    metadata.formData = this.myFormdata;
+    console.log(metadata.formData);
+
+    return metadata;
+  };
+
+  onRemoved(file: FileHolder) {
+    // do some stuff with the removed file.
+    console.log("onRemoved");
+    console.log(file);
+    console.log(this.picList);
+  }
+
+  onUploadFinished($event){
+    console.log("onUploadFinished");
+    console.log($event);
+    console.log(this.picList);
+  }
+
+  onUploadStateChanged(state: boolean) {
+    console.log("onUploadStateChanged");
+    console.log(JSON.stringify(state));
+  }
+
+  picUpConfirm = (e,up) => {
+    console.log(e);
+    console.log(up);
+    // this.uploadUrl = 'jcw001.oss-cn-shanghai.aliyuncs.com';
+  };
+
+  picUpCancel = (e) => {
+    this.isPicUpModalVisible = false;
   };
 
   constructor(
@@ -275,6 +374,7 @@ export class JcManageComponent implements OnInit {
 
   ngOnInit() {
     console.log("JcTypeManageComponent ngOnInit.");
+
     this.searchForm = this.fb.group({
       'jcName': new FormControl(),
       'jcType': new FormControl(),

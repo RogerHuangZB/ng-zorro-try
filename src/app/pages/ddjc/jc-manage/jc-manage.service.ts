@@ -119,6 +119,15 @@ export class JcManageService {
       .catch(this.handleError);
   }
 
+  jcwPostPolicy(): Promise<any> {
+    let serverUrl = 'http://101.132.41.235/jcwPostPolicyServer7070/';
+    return this.http.get(serverUrl, {
+      headers: this.headers
+    }).toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body || { };

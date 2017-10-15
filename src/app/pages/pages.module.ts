@@ -18,6 +18,8 @@ import {JcTypeManageService} from "./ddjc/jc-type-manage/jc-type-manage.service"
 import {PagesService} from "./pages.service";
 import {JcBrandManageService} from "./ddjc/jc-brand-manage/jc-brand-manage.service";
 import {JcManageService} from "./ddjc/jc-manage/jc-manage.service";
+import {FileUploadModule} from "ng2-file-upload";
+import {ImageUploadModule} from "angular2-image-upload";
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import {JcManageService} from "./ddjc/jc-manage/jc-manage.service";
     ReactiveFormsModule,
     HttpModule,
     routing,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    FileUploadModule,
+    ImageUploadModule.forRoot(),
   ],
   entryComponents: [
     ...importComs

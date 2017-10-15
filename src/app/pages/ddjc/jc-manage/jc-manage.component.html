@@ -994,3 +994,47 @@
     </button>
   </ng-template>
 </nz-modal>
+
+
+<!--上传照片-->
+<nz-modal [nzVisible]="isPicUpModalVisible"
+          [nzTitle]="picUpTitle"
+          [nzWidth]="720"
+          [nzWrapClassName]="'vertical-center-modal'"
+          [nzContent]="picUpContent"
+          [nzFooter]="picUpFooter"
+          (nzOnCancel)="picUpCancel($event)">
+  <ng-template #picUpTitle>
+    上传照片
+  </ng-template>
+  <ng-template #picUpContent>
+    <image-upload
+      [url]="uploadUrl"
+      [max]="6"
+      [maxFileSize]="10485760"
+      [headers]=""
+      [buttonCaption]="'选择照片'"
+      [clearButtonCaption]="'清空'"
+      [fileTooLargeMessage]="'图片太大,大小限制为<10M!'"
+      [dropBoxMessage]="''"
+      [extensions]="['jpg','png','gif']"
+      [uploadedFiles]="picList"
+      [class]="'customClass'"
+      [style]="'customStyle'"
+      [beforeUpload]="onBeforeUpload"
+      (removed)="onRemoved($event)"
+      (uploadFinished)="onUploadFinished($event)"
+      (uploadStateChanged)="onUploadStateChanged($event)">
+    </image-upload>
+  </ng-template>
+  <ng-template #picUpFooter>
+    <button nz-button [nzType]="'default'" [nzSize]="'large'"
+            (click)="picUpConfirm($event)">
+      上 传
+    </button>
+    <button nz-button [nzType]="'default'" [nzSize]="'large'"
+            (click)="picUpCancel($event)">
+      返 回
+    </button>
+  </ng-template>
+</nz-modal>

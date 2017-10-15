@@ -21,8 +21,13 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@types/plupload": "^2.0.4",
+    "angular2-image-upload": "^1.0.0-rc.0",
     "core-js": "^2.4.1",
     "ng-zorro-antd": "^0.5.1",
+    "ng2-file-upload": "^1.2.1",
+    "ng4-qiniu": "^1.0.7",
+    "plupload": "^2.3.4",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },
