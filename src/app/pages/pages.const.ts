@@ -18,6 +18,8 @@ if(environment.production){
   API_URL = 'http://127.0.0.1:9090/';
 }
 
+export const UPLOAD_PIC_URL = 'jc/uploadJcPic';
+
 export {
   API_URL as API_URL
 };

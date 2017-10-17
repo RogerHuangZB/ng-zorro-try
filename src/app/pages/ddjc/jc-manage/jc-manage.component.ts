@@ -5,7 +5,6 @@ import {JcList} from "../models/jc.model";
 import {JcManageService} from "./jc-manage.service";
 import {JcTypeManageService} from "../jc-type-manage/jc-type-manage.service";
 import {JcBrandManageService} from "../jc-brand-manage/jc-brand-manage.service";
-import { FileUploader } from "ng2-file-upload";
 import {FileHolder, UploadMetadata} from "angular2-image-upload";
 
 @Component({
@@ -84,7 +83,7 @@ export class JcManageComponent implements OnInit {
   isPicUpModalConfirmLoading = false;
 
   showInfoModal = (data) => {
-    console.log(data);
+    // console.log(data);
 
     this.infoForm.reset();
     this.infoForm.setValue({
@@ -250,7 +249,11 @@ export class JcManageComponent implements OnInit {
 
   showPicModal = (data) => {
     this.isPicUpModalVisible = true;
-    this.getOSSAcess();
+    // this.getOSSAcess();
+
+    this.myFormdata = {
+      'jcId' : data.jcId
+    };
   };
 
   key = '';
@@ -284,12 +287,13 @@ export class JcManageComponent implements OnInit {
       });
   }
 
-  // uploadUrl = '';
-  uploadUrl = 'http://jcw001.oss-cn-shanghai.aliyuncs.com';
+  uploadUrl = '';
+  // uploadUrl = 'http://jcw001.oss-cn-shanghai.aliyuncs.com';
   // uploadUrl = 'http://jcw010.oss-cn-shanghai.aliyuncs.com';
-  myHeaders: { [name: string]: any } = {};
   myFormdata: { [name: string]: any } = {};
-  picList = [];
+  myHeaders: { [name: string]: any } = {};
+  picList: FileHolder[] = [];
+  uploadedPicList = [];
 
   customStyle = {
     selectButton: {
@@ -345,6 +349,7 @@ export class JcManageComponent implements OnInit {
     // this.uploadUrl = 'jcw001.oss-cn-shanghai.aliyuncs.com';
   };
 
+
   picUpCancel = (e) => {
     this.isPicUpModalVisible = false;
   };
@@ -370,6 +375,7 @@ export class JcManageComponent implements OnInit {
     this.pic5_url = 'assets/Lamborghini/1448938700943.jpg';
     this.pic6_url = 'assets/Lamborghini/1448938713618.jpg';
 
+    this.uploadUrl = this.jcManageService.uploadUrl;
   }
 
   ngOnInit() {

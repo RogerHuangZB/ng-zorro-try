@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import {isNullOrUndefined} from "util";
 import {PagesService} from "../../pages.service";
-import {Http, Headers, Response} from "@angular/http";
-import {API_URL} from "../../pages.const";
+import {Http, Headers, Response, RequestOptionsArgs, RequestOptions} from "@angular/http";
+import {API_URL, UPLOAD_PIC_URL} from "../../pages.const";
 import {Observable} from "rxjs";
 
 @Injectable()
 export class JcManageService {
 
-  private apiUrl: string = API_URL;
+  private _apiUrl: string = API_URL;
   private headers = new Headers();
+  private _uploadUrl: string = API_URL + UPLOAD_PIC_URL;
 
   constructor(
     private http: Http,
@@ -18,8 +19,12 @@ export class JcManageService {
     this.headers = this.pagesService.getHeaders();
   }
 
+  get uploadUrl(): string {
+    return this._uploadUrl;
+  }
+
   dataList(page:number, rows:number, sort:string, order:string, searchForm:any): Promise<any> {
-    let postUrl = this.apiUrl + "jc/dataGrid";
+    let postUrl = this._apiUrl + "jc/dataGrid";
     let body = "page="+page+"&rows="+rows+"&sort="+sort+"&order="+order;
 
     if((!isNullOrUndefined(searchForm.jcName))&&searchForm.jcName!==''){
@@ -50,7 +55,7 @@ export class JcManageService {
   }
   /*新增*/
   addRow(row:any):Promise<any>{
-    let postUrl = this.apiUrl + "jc/add";
+    let postUrl = this._apiUrl + "jc/add";
     let body = "jcName="+row.jcName
       +"&jcTypeId="+row.jcTypeId
       +"&jcBrandId="+row.jcBrandId
@@ -78,7 +83,7 @@ export class JcManageService {
 
   /*删除*/
   deleteRow(rowId: number):Promise<any>{
-    let postUrl = this.apiUrl + "jc/delete";
+    let postUrl = this._apiUrl + "jc/delete";
     let resjson:any = null;
     let body = 'jcId=' + rowId;
     return this.http.post(postUrl, body, {
@@ -92,7 +97,7 @@ export class JcManageService {
 
   /*编辑*/
   editRow(row:any): Promise<any> {
-    let postUrl = this.apiUrl + "jc/edit";
+    let postUrl = this._apiUrl + "jc/edit";
     let body = "jcId="+row.jcId
       +"&jcName="+row.jcName
       +"&jcTypeId="+row.jcTypeId
@@ -126,6 +131,36 @@ export class JcManageService {
     }).toPromise()
       .then(this.extractData)
       .catch(this.handleError);
+  }
+
+  public postImage(image: File,
+                   headers?: Headers | { [name: string]: any },
+                   partName: string = 'image',
+                   customFormData?: { [name: string]: any },
+                   withCredentials?: boolean): Observable<Response> {
+    let uploadUrl = this._apiUrl + 'jc/addJcPics';
+    if (!uploadUrl || uploadUrl === '') {
+      throw new Error('Url is not set! Please set it before doing queries');
+    }
+
+    const options: RequestOptionsArgs = new RequestOptions();
+
+    if (withCredentials) {
+      options.withCredentials = withCredentials;
+    }
+
+    if (headers) {
+      options.headers = new Headers(headers);
+    }
+
+
+    // add custom form data
+    let formData = new FormData();
+    for (let key in customFormData) {
+      formData.append(key, customFormData[key]);
+    }
+    formData.append(partName, image);
+    return this.http.post(uploadUrl, formData, options);
   }
 
   private extractData(res: Response) {

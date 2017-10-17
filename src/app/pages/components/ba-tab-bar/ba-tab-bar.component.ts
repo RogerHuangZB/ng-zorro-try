@@ -37,6 +37,11 @@ export class BaTabBarComponent implements OnInit {
     comId: 'JcManageComponent'
   };
 
+  // homeTab:TabModel = {
+  //   name: '用户管理',
+  //   comId: 'UserManageComponent'
+  // };
+
   constructor(
     private componentFactoryResolver:ComponentFactoryResolver,
     private baTabBarService:BaTabBarService
