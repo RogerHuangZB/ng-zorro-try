@@ -124,6 +124,22 @@ export class JcManageService {
       .catch(this.handleError);
   }
 
+  deletePic(name: string) {
+    let postUrl = this._apiUrl + "jcPic/delete";
+    let body = "picName="+name;
+
+    return this.http.post(postUrl, body, {
+      headers: this.headers
+    }).toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
+
+
+
+
+
   jcwPostPolicy(): Promise<any> {
     let serverUrl = 'http://101.132.41.235/jcwPostPolicyServer7070/';
     return this.http.get(serverUrl, {
@@ -172,5 +188,4 @@ export class JcManageService {
     console.log('An error occurred', error);
     return Promise.reject(error.message || error);
   }
-
 }

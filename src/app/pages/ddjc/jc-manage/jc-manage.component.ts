@@ -248,12 +248,13 @@ export class JcManageComponent implements OnInit {
   };
 
   showPicModal = (data) => {
-    this.isPicUpModalVisible = true;
-    // this.getOSSAcess();
-
     this.myFormdata = {
       'jcId' : data.jcId
     };
+
+    this.uploadedPicList = ['assets/Lamborghini/1448938675281.jpg','assets/Lamborghini/1448938686114.jpg'];
+
+    this.isPicUpModalVisible = true;
   };
 
   key = '';
@@ -315,10 +316,6 @@ export class JcManageComponent implements OnInit {
   };
 
   onBeforeUpload = (metadata: UploadMetadata) => {
-    console.log(metadata);
-    console.log(metadata.url);
-    console.log(metadata.file);
-
     metadata.formData = this.myFormdata;
     console.log(metadata.formData);
 
@@ -329,13 +326,22 @@ export class JcManageComponent implements OnInit {
     // do some stuff with the removed file.
     console.log("onRemoved");
     console.log(file);
-    console.log(this.picList);
+
+    if(file.serverResponse){
+      console.log(file.serverResponse);
+    }else{
+      console.log(file.file);
+    }
+
+    // this.jcManageService.deletePic(file.file.name)
+    //   .then((res:any) => {
+    //     console.log(res);
+    //   });
   }
 
   onUploadFinished($event){
     console.log("onUploadFinished");
     console.log($event);
-    console.log(this.picList);
   }
 
   onUploadStateChanged(state: boolean) {
@@ -343,14 +349,16 @@ export class JcManageComponent implements OnInit {
     console.log(JSON.stringify(state));
   }
 
-  picUpConfirm = (e,up) => {
+  picUpConfirm = (e) => {
     console.log(e);
-    console.log(up);
-    // this.uploadUrl = 'jcw001.oss-cn-shanghai.aliyuncs.com';
+    this.uploadedPicList = [];
+    this.isPicUpModalVisible = false;
   };
 
 
   picUpCancel = (e) => {
+    console.log(e);
+    this.uploadedPicList = [];
     this.isPicUpModalVisible = false;
   };
 

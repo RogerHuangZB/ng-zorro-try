@@ -1009,6 +1009,7 @@
   </ng-template>
   <ng-template #picUpContent>
     <image-upload
+      *ngIf="isPicUpModalVisible"
       [url]="uploadUrl"
       [max]="6"
       [maxFileSize]="10485760"
@@ -1030,7 +1031,7 @@
   <ng-template #picUpFooter>
     <button nz-button [nzType]="'default'" [nzSize]="'large'"
             (click)="picUpConfirm($event)">
-      上 传
+      完 成
     </button>
     <button nz-button [nzType]="'default'" [nzSize]="'large'"
             (click)="picUpCancel($event)">
