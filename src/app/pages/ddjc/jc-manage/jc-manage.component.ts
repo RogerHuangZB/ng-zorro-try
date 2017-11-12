@@ -6,6 +6,7 @@ import {JcManageService} from "./jc-manage.service";
 import {JcTypeManageService} from "../jc-type-manage/jc-type-manage.service";
 import {JcBrandManageService} from "../jc-brand-manage/jc-brand-manage.service";
 import {FileHolder, UploadMetadata} from "angular2-image-upload";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-jc-manage',
@@ -35,7 +36,7 @@ export class JcManageComponent implements OnInit {
   _size = 'small';
 
   _current = 1;
-  _pageSize = 10;
+  _pageSize = 7;
   _total = 0;
 
   jcTypes = [];
@@ -83,8 +84,7 @@ export class JcManageComponent implements OnInit {
   isPicUpModalConfirmLoading = false;
 
   showInfoModal = (data) => {
-    // console.log(data);
-
+    console.log(data);
     this.infoForm.reset();
     this.infoForm.setValue({
       'infoJcId':        data.jcId,
@@ -105,6 +105,25 @@ export class JcManageComponent implements OnInit {
       'infoRemark':      data.remark,
       'infoValidity':    data.validity
     });
+
+    if(data.jcPics[0]){
+      this.pic1_url = data.jcPics[0].pathUrl + data.jcPics[0].picName;
+    }
+    if(data.jcPics[1]){
+      this.pic2_url = data.jcPics[1].pathUrl + data.jcPics[1].picName;
+    }
+    if(data.jcPics[2]){
+      this.pic3_url = data.jcPics[2].pathUrl + data.jcPics[2].picName;
+    }
+    if(data.jcPics[3]){
+      this.pic4_url = data.jcPics[3].pathUrl + data.jcPics[3].picName;
+    }
+    if(data.jcPics[4]){
+      this.pic5_url = data.jcPics[4].pathUrl + data.jcPics[4].picName;
+    }
+    if(data.jcPics[5]){
+      this.pic6_url = data.jcPics[5].pathUrl + data.jcPics[5].picName;
+    }
 
     this.isInfoVisible = true;
   };
@@ -252,7 +271,7 @@ export class JcManageComponent implements OnInit {
       'jcId' : data.jcId
     };
 
-    this.uploadedPicList = ['assets/Lamborghini/1448938675281.jpg','assets/Lamborghini/1448938686114.jpg'];
+    this.uploadedPicList = [];
 
     this.isPicUpModalVisible = true;
   };
@@ -364,6 +383,7 @@ export class JcManageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private domSanitizer: DomSanitizer,
     private confirmServ: NzModalService,
     private jcManageService: JcManageService,
     private jcTypeManageService: JcTypeManageService,
@@ -376,12 +396,12 @@ export class JcManageComponent implements OnInit {
       this.jcBrands = res;
     });
 
-    this.pic1_url = 'assets/Lamborghini/1448938675281.jpg';
-    this.pic2_url = 'assets/Lamborghini/1448938686114.jpg';
-    this.pic3_url = 'assets/Lamborghini/1448938690221.jpg';
-    this.pic4_url = 'assets/Lamborghini/1448938694372.jpg';
-    this.pic5_url = 'assets/Lamborghini/1448938700943.jpg';
-    this.pic6_url = 'assets/Lamborghini/1448938713618.jpg';
+    this.pic1_url = '';
+    this.pic2_url = '';
+    this.pic3_url = '';
+    this.pic4_url = '';
+    this.pic5_url = '';
+    this.pic6_url = '';
 
     this.uploadUrl = this.jcManageService.uploadUrl;
   }

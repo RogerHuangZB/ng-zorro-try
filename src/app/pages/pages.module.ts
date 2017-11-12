@@ -20,6 +20,7 @@ import {JcBrandManageService} from "./ddjc/jc-brand-manage/jc-brand-manage.servi
 import {JcManageService} from "./ddjc/jc-manage/jc-manage.service";
 import {FileUploadModule} from "ng2-file-upload";
 import {ImageUploadModule} from "angular2-image-upload";
+import {TrustUrlPipe} from "./ddjc/jc-manage/transformTrustUrl";
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import {ImageUploadModule} from "angular2-image-upload";
     BaTabBarComponent,
     ...importComs,
     JcManageComponent,
+    TrustUrlPipe,
     JcBrandManageComponent,
     JcTypeManageComponent,
   ],
