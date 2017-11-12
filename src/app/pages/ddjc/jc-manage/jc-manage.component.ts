@@ -6,7 +6,7 @@ import {JcManageService} from "./jc-manage.service";
 import {JcTypeManageService} from "../jc-type-manage/jc-type-manage.service";
 import {JcBrandManageService} from "../jc-brand-manage/jc-brand-manage.service";
 import {FileHolder, UploadMetadata} from "angular2-image-upload";
-import {DomSanitizer} from "@angular/platform-browser";
+import {PIC_URL} from "../../pages.const";
 
 @Component({
   selector: 'app-jc-manage',
@@ -107,22 +107,22 @@ export class JcManageComponent implements OnInit {
     });
 
     if(data.jcPics[0]){
-      this.pic1_url = data.jcPics[0].pathUrl + data.jcPics[0].picName;
+      this.pic1_url = PIC_URL + data.jcPics[0].picName.replace(".jpg","0.jpg");
     }
     if(data.jcPics[1]){
-      this.pic2_url = data.jcPics[1].pathUrl + data.jcPics[1].picName;
+      this.pic2_url = PIC_URL + data.jcPics[1].picName.replace(".jpg","0.jpg");
     }
     if(data.jcPics[2]){
-      this.pic3_url = data.jcPics[2].pathUrl + data.jcPics[2].picName;
+      this.pic3_url = PIC_URL + data.jcPics[2].picName.replace(".jpg","0.jpg");
     }
     if(data.jcPics[3]){
-      this.pic4_url = data.jcPics[3].pathUrl + data.jcPics[3].picName;
+      this.pic4_url = PIC_URL + data.jcPics[3].picName.replace(".jpg","0.jpg");
     }
     if(data.jcPics[4]){
-      this.pic5_url = data.jcPics[4].pathUrl + data.jcPics[4].picName;
+      this.pic5_url = PIC_URL + data.jcPics[4].picName.replace(".jpg","0.jpg");
     }
     if(data.jcPics[5]){
-      this.pic6_url = data.jcPics[5].pathUrl + data.jcPics[5].picName;
+      this.pic6_url = PIC_URL + data.jcPics[5].picName.replace(".jpg","0.jpg");
     }
 
     this.isInfoVisible = true;
@@ -371,6 +371,9 @@ export class JcManageComponent implements OnInit {
   picUpConfirm = (e) => {
     console.log(e);
     this.uploadedPicList = [];
+
+    this.search('picUpConfirm');
+
     this.isPicUpModalVisible = false;
   };
 
@@ -378,12 +381,14 @@ export class JcManageComponent implements OnInit {
   picUpCancel = (e) => {
     console.log(e);
     this.uploadedPicList = [];
+
+    this.search('picUpCancel');
+
     this.isPicUpModalVisible = false;
   };
 
   constructor(
     private fb: FormBuilder,
-    private domSanitizer: DomSanitizer,
     private confirmServ: NzModalService,
     private jcManageService: JcManageService,
     private jcTypeManageService: JcTypeManageService,
