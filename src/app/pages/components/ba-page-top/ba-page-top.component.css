@@ -7,3 +7,11 @@
   z-index: 9999;
   background-color: dimgray;
 }
+
+.sys-title {
+  display: inline-block;
+  line-height: 50px;
+  color: #f39801;
+  padding-left: 15px;
+  letter-spacing: 3px;
+}
