@@ -107,22 +107,22 @@ export class JcManageComponent implements OnInit {
     });
 
     if(data.jcPics[0]){
-      this.pic1_url = PIC_URL + data.jcPics[0].picName.replace(".jpg","0.jpg");
+      this.pic1_url = PIC_URL + data.jcPics[0].picName;
     }
     if(data.jcPics[1]){
-      this.pic2_url = PIC_URL + data.jcPics[1].picName.replace(".jpg","0.jpg");
+      this.pic2_url = PIC_URL + data.jcPics[1].picName;
     }
     if(data.jcPics[2]){
-      this.pic3_url = PIC_URL + data.jcPics[2].picName.replace(".jpg","0.jpg");
+      this.pic3_url = PIC_URL + data.jcPics[2].picName;
     }
     if(data.jcPics[3]){
-      this.pic4_url = PIC_URL + data.jcPics[3].picName.replace(".jpg","0.jpg");
+      this.pic4_url = PIC_URL + data.jcPics[3].picName;
     }
     if(data.jcPics[4]){
-      this.pic5_url = PIC_URL + data.jcPics[4].picName.replace(".jpg","0.jpg");
+      this.pic5_url = PIC_URL + data.jcPics[4].picName;
     }
     if(data.jcPics[5]){
-      this.pic6_url = PIC_URL + data.jcPics[5].picName.replace(".jpg","0.jpg");
+      this.pic6_url = PIC_URL + data.jcPics[5].picName;
     }
 
     this.isInfoVisible = true;
@@ -276,7 +276,7 @@ export class JcManageComponent implements OnInit {
     this.uploadedPicList = [];
 
     for(let i=0;i<data.jcPics.length;i++){
-      this.uploadedPicList.push(PIC_URL + data.jcPics[i].picName.replace(".jpg","0.jpg"));
+      this.uploadedPicList.push(PIC_URL + data.jcPics[i].picName);
     }
 
     this.isPicUpModalVisible = true;
@@ -354,21 +354,21 @@ export class JcManageComponent implements OnInit {
     let picName = '';
 
     if(file.serverResponse){
-      console.log("serverResponse");
-      console.log(file.file);
-      console.log(file.serverResponse);
+      // console.log("serverResponse");
+      // console.log(file.file);
+      // console.log(file.serverResponse);
       let sr:any = file.serverResponse;
       picName = JSON.parse(sr._body).data.picName;
     }else{
-      console.log("else");
-      console.log(file.file);
-      console.log(file.file.name);
+      // console.log("else");
+      // console.log(file.file);
+      // console.log(file.file.name);
       let nameArr = file.file.name.split('/');
       let arrlen = nameArr.length;
       picName = nameArr[arrlen-1];
     }
 
-    console.log(picName);
+    // console.log(picName);
 
     this.jcManageService.deletePic(picName)
       .then((res:any) => {
