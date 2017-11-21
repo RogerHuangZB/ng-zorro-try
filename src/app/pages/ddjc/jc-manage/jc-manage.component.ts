@@ -84,7 +84,7 @@ export class JcManageComponent implements OnInit {
   isPicUpModalConfirmLoading = false;
 
   showInfoModal = (data) => {
-    console.log(data);
+    // console.log(data);
     this.infoForm.reset();
     this.infoForm.setValue({
       'infoJcId':        data.jcId,
@@ -129,6 +129,7 @@ export class JcManageComponent implements OnInit {
   };
 
   infoCancel = (e) => {
+    this.initPicUrls();
     this.isInfoVisible = false;
   };
 
@@ -267,11 +268,16 @@ export class JcManageComponent implements OnInit {
   };
 
   showPicModal = (data) => {
+    console.log(data);
     this.myFormdata = {
       'jcId' : data.jcId
     };
 
     this.uploadedPicList = [];
+
+    for(let i=0;i<data.jcPics.length;i++){
+      this.uploadedPicList.push(PIC_URL + data.jcPics[i].picName.replace(".jpg","0.jpg"));
+    }
 
     this.isPicUpModalVisible = true;
   };
@@ -344,13 +350,25 @@ export class JcManageComponent implements OnInit {
   onRemoved(file: FileHolder) {
     // do some stuff with the removed file.
     console.log("onRemoved");
-    console.log(file);
+    // console.log(file);
+    let picName = '';
 
     if(file.serverResponse){
-      console.log(file.serverResponse);
-    }else{
+      console.log("serverResponse");
       console.log(file.file);
+      console.log(file.serverResponse);
+      let sr:any = file.serverResponse;
+      picName = JSON.parse(sr._body).data.picName;
+    }else{
+      console.log("else");
+      console.log(file.file);
+      console.log(file.file.name);
+      let nameArr = file.file.name.split('/');
+      let arrlen = nameArr.length;
+      picName = nameArr[arrlen-1]
     }
+
+    console.log(picName);
 
     // this.jcManageService.deletePic(file.file.name)
     //   .then((res:any) => {
@@ -387,6 +405,15 @@ export class JcManageComponent implements OnInit {
     this.isPicUpModalVisible = false;
   };
 
+  initPicUrls(){
+    this.pic1_url = '';
+    this.pic2_url = '';
+    this.pic3_url = '';
+    this.pic4_url = '';
+    this.pic5_url = '';
+    this.pic6_url = '';
+  }
+
   constructor(
     private fb: FormBuilder,
     private confirmServ: NzModalService,
@@ -401,12 +428,7 @@ export class JcManageComponent implements OnInit {
       this.jcBrands = res;
     });
 
-    this.pic1_url = '';
-    this.pic2_url = '';
-    this.pic3_url = '';
-    this.pic4_url = '';
-    this.pic5_url = '';
-    this.pic6_url = '';
+    this.initPicUrls();
 
     this.uploadUrl = this.jcManageService.uploadUrl;
   }
