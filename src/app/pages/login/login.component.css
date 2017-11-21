@@ -1,0 +1,271 @@
+.login-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: steelblue;
+}
+
+.login-div {
+  width: 540px;
+  margin: 0 auto;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 32px;
+}
+
+.login-div h1 {
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  margin-top: 0;
+  font-weight: 300;
+  margin-bottom: 28px;
+  text-align: center;
+  font-size: 32px;
+  line-height: 1.1;
+  color: inherit;
+}
+
+.login-form {
+  display: block;
+  margin-top: 0em;
+}
+
+.form-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-bottom: 12px;
+}
+
+.form-label {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  line-height: 34px;
+  padding-top: 0 !important;
+  margin-bottom: 5px;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 18px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 16.66666667%;
+  flex: 0 0 16.66666667%;
+  max-width: 16.66666667%;
+}
+
+.form-input-div {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  -webkit-box-flex: 0;
+  flex: 0 0 83.33333333%;
+  max-width: 83.33333333%;
+}
+
+.form-input {
+  font-family: sans-serif;
+  margin: 0 0 2rem 0;
+  overflow: visible;
+  touch-action: manipulation;
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  line-height: 1.25;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  /*color: #ffffff;*/
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  /*background-color: rgba(255, 255, 255, 0.1);*/
+  box-shadow: none;
+  font-size: 14px;
+  position: relative;
+}
+
+.form-input:focus{
+  border-color: #66afe9;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+}
+
+.form-btn-div {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  -webkit-box-flex: 0;
+  flex: 0 0 83.33333333%;
+  max-width: 83.33333333%;
+  margin-left: 16.66666667%;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+.ng-untouched:not(form)  {
+  border-left: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.alert-danger {
+  margin-top: -1.75rem;
+  position: absolute;
+  padding-right: 17.85rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+.btn {
+  padding: .5rem 11.2rem;
+}
+.topBgDiv {
+  left: 0px;
+  width: 100%;
+  height: 80px;
+  background: #FBFBFB;
+  background-size: 100% 100%;
+  position: absolute;
+  margin-top: 0px;
+  margin-left: 0px;
+}
+.bottombgDiv{
+  width: 100%;
+  height: 75px;
+  background: #FBFBFB;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  text-align: center;
+}
+.companyInfo{
+  position: relative;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.companyInfo span{
+  color: #ccc;
+  font-weight: bold;
+  font-size: 18px;
+}
+.loginDiv{
+  width: 356px;
+  height: 400px;
+  background: #05283c;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 44%;
+  left: 90%;
+  margin-top: -163px;
+  margin-left: -321px;
+  border-radius: 15px;
+}
+
+.login_buttons{
+  width: 300px;
+  height: 60px;
+  position: absolute;
+  left: 75.1%;
+  bottom: 30px;
+  margin-left: -240px;
+  text-align: center;
+}
+.login_sign_up{
+  background: #3989F5;
+  border: 1px solid #3989F5;
+  display: inline-block;
+  width: 82.3%;
+  height: 100%;
+  margin-right: -8px;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  vertical-align: middle;
+  letter-spacing: .5rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+tr{
+  height: 70px;
+}
+.loginDiv input{
+  width: 160px;
+  height: 30px;
+  font-size: 12px;
+  border: none;
+  outline: none;
+}
+.login_b_title{
+  padding-left: 20px;
+  padding-top: 20px;
+  color: #9BB5C5;
+
+}
+.login_s_title{
+  padding-left: 20px;
+  padding-bottom: 10px;
+  color: #9BB5C5;
+}
+.hr_c{
+  height: 1px;
+  border: none;
+  border-top: 1px solid #555555;
+}
+.login_info{
+  color: #9BB5C5
+}
+.container {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.container {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.companyIconDiv {
+  width: 400px;
+  height: 50px;
+  background: #fff;
+  margin-left: 10px;
+  margin-top: 12px;
+}
+.user{
+  width: 35px;
+  height: 35px;
+  background-color: #fff;
+}
+.pwd{
+  width: 35px;
+  height: 35px;
+  background-color: #fff;
+}
+.td_padding{
+  padding-left: 15px;
+  width: 65px
+}

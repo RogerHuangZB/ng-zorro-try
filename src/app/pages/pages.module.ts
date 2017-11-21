@@ -21,6 +21,7 @@ import {JcManageService} from "./ddjc/jc-manage/jc-manage.service";
 import {FileUploadModule} from "ng2-file-upload";
 import {ImageUploadModule} from "angular2-image-upload";
 import {TrustUrlPipe} from "./ddjc/jc-manage/transformTrustUrl";
+import {AuthGuard} from "./auth-guard.service";
 
 @NgModule({
   imports: [
@@ -38,7 +39,6 @@ import {TrustUrlPipe} from "./ddjc/jc-manage/transformTrustUrl";
   ],
   declarations: [
     Pages,
-    Login,
     BaPageTopComponent,
     BaMenuBarComponent,
     BaTabBarComponent,
@@ -49,6 +49,7 @@ import {TrustUrlPipe} from "./ddjc/jc-manage/transformTrustUrl";
     JcTypeManageComponent,
   ],
   providers: [
+    AuthGuard,
     PagesService,
     BaTabBarService,
     JcManageService,

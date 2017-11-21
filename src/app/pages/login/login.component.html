@@ -1,3 +1,59 @@
-<p>
-  login works!
-</p>
+
+<div class="container">
+  <div class="topBgDiv">
+    <div class="companyIconDiv">
+
+    </div>
+  </div>
+  <div class="loginDiv" (keydown)="enterKeyDown($event, f.value)">
+    <h4 class="login_b_title">
+      用户登录
+    </h4>
+    <h6 class="login_s_title">
+      Login
+    </h6>
+    <hr class="hr_c">
+    <form method="post" #f="ngForm" >
+      <table style="width: 100%">
+        <tr>
+          <td class="td_padding">
+            <div class="user">
+
+            </div>
+          </td>
+          <td class="login_info">账号:</td>
+          <td>
+            <input class="" placeholder="请输入用户名" [(ngModel)]="signIn.accountNumber" name="accountNumber" />
+          </td>
+        </tr>
+        <tr>
+          <td class="td_padding">
+            <div class="pwd">
+
+            </div>
+          </td>
+          <td class="login_info">密码:</td>
+          <td>
+            <input class="" type="password" placeholder="请输入密码" style="top: 205px" [(ngModel)]="signIn.code" name="code"/>
+          </td>
+        </tr>
+      </table>
+
+      <hr class="hr_c">
+      <div class="login_buttons">
+        <button class="login_sign_up"  (click)="onSubmit(f.value)">登录</button>
+
+      </div>
+
+    </form>
+  </div>
+
+
+  <!--footer-->
+  <div class="bottombgDiv">
+    <div class="companyInfo">
+      <span>上海民航华东凯亚系统集成有限公司@版权2017</span>
+    </div>
+  </div>
+
+</div>
