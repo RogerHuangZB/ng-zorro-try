@@ -365,15 +365,15 @@ export class JcManageComponent implements OnInit {
       console.log(file.file.name);
       let nameArr = file.file.name.split('/');
       let arrlen = nameArr.length;
-      picName = nameArr[arrlen-1]
+      picName = nameArr[arrlen-1];
     }
 
     console.log(picName);
 
-    // this.jcManageService.deletePic(file.file.name)
-    //   .then((res:any) => {
-    //     console.log(res);
-    //   });
+    this.jcManageService.deletePic(picName)
+      .then((res:any) => {
+        console.log(res);
+      });
   }
 
   onUploadFinished($event){
