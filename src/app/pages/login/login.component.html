@@ -9,32 +9,32 @@
     <h4 class="login_b_title">
       用户登录
     </h4>
-    <h6 class="login_s_title">
-      Login
-    </h6>
+    <!--<h6 class="login_s_title">-->
+      <!--Login-->
+    <!--</h6>-->
     <hr class="hr_c">
     <form method="post" #f="ngForm" >
       <table style="width: 100%">
         <tr>
           <td class="td_padding">
             <div class="user">
-
+              <i class="anticon anticon-user"></i>
             </div>
           </td>
           <td class="login_info">账号:</td>
           <td>
-            <input class="" placeholder="请输入用户名" [(ngModel)]="signIn.accountNumber" name="accountNumber" />
+            <input class="login-form-input" placeholder="" [(ngModel)]="signIn.accountNumber" name="accountNumber" />
           </td>
         </tr>
         <tr>
           <td class="td_padding">
             <div class="pwd">
-
+              <i class="anticon anticon-key"></i>
             </div>
           </td>
           <td class="login_info">密码:</td>
           <td>
-            <input class="" type="password" placeholder="请输入密码" style="top: 205px" [(ngModel)]="signIn.code" name="code"/>
+            <input class="login-form-input" type="password" placeholder="" style="top: 205px" [(ngModel)]="signIn.code" name="code"/>
           </td>
         </tr>
       </table>
@@ -52,7 +52,7 @@
   <!--footer-->
   <div class="bottombgDiv">
     <div class="companyInfo">
-      <span>上海民航华东凯亚系统集成有限公司@版权2017</span>
+      <span>登登二手机床直卖网@版权2017</span>
     </div>
   </div>
 

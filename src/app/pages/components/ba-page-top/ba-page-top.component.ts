@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from "../../sysManage/model/user_row";
+import {Router} from "@angular/router";
+import {PagesService} from "../../pages.service";
 
 @Component({
   selector: 'ba-page-top',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaPageTopComponent implements OnInit {
 
-  constructor() { }
+  loginUser: User;
+
+  constructor(private _router:Router,
+              private pagesService:PagesService) {
+    this.loginUser = new User(0,'','','',0,0,0,'','','',0,'',null);
+    this.loginUser.deptName = sessionStorage.getItem('_userDeptName');
+    this.loginUser.name = sessionStorage.getItem('_userName');
+  }
 
   ngOnInit() {
   }
 
+  logout(){
+    sessionStorage.clear();
+    this.pagesService.deleteAuth();
+    this._router.navigate(['/login']);
+  }
 }
