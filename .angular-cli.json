@@ -1,12 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "jc-manage-system"
+    "name": "jcms"
   },
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "jcms",
       "assets": [
         "assets",
         "favicon.ico"
