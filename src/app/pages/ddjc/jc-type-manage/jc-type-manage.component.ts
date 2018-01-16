@@ -164,6 +164,66 @@ export class JcTypeManageComponent implements OnInit {
   ) {
   }
 
+
+  //treeTable
+  expandDataCache = {};
+
+  collapse(array, data, $event) {
+    if ($event === false) {
+      if (data.children) {
+        data.children.forEach(d => {
+          const target = array.find(a => a.typeId === d.typeId);
+          target.expand = false;
+          this.collapse(array, target, false);
+        });
+      } else {
+        return;
+      }
+    }
+  }
+
+  convertTreeToList(root) {
+    const stack = [], array = [], hashMap = {};
+    stack.push({ ...root, level: 0, expand: false });
+
+    while (stack.length !== 0) {
+      const node = stack.pop();
+      this.visitNode(node, hashMap, array);
+      if (node.children) {
+        for (let i = node.children.length - 1; i >= 0; i--) {
+          stack.push({ ...node.children[i], level: node.level + 1, expand: false, parent: node });
+        }
+      }
+    }
+
+    return array;
+  }
+
+  visitNode(node, hashMap, array) {
+    if (!hashMap[node.typeId]) {
+      hashMap[node.typeId] = true;
+      array.push(node);
+    }
+  }
+
+  treeTableDataList: any[] = [];
+  getTree() {
+    // console.log(type);
+    this._loading = true;
+    // console.log(this.searchForm.value);
+    this.jcTypeManageService.dataTree().then((res)=>{
+      console.log(res);
+      this._loading = false;
+      this.treeTableDataList = res;
+
+      this.treeTableDataList.forEach(item => {
+        this.expandDataCache[item.typeId] = this.convertTreeToList(item);
+      });
+
+      console.log(this.treeTableDataList);
+    });
+  }
+
   ngOnInit() {
     console.log("JcTypeManageComponent ngOnInit.");
     this.searchForm = this.fb.group({
@@ -190,6 +250,8 @@ export class JcTypeManageComponent implements OnInit {
     });
 
     this.search('ngOnInit');
+
+    this.getTree();
   }
 
 }

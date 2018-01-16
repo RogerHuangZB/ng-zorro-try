@@ -15,19 +15,19 @@
           </div>
         </div>
       </div>
-      <!--<div nz-col [nzSpan]="8">-->
-        <!--<div nz-form-item nz-row>-->
-          <!--<div nz-form-label nz-col [nzSpan]="5">-->
-            <!--<label [attr.for]="'ftypeNameId'">父类型名</label>-->
-          <!--</div>-->
-          <!--<div nz-form-control nz-col [nzSpan]="19">-->
-            <!--<nz-input [nzSize]="'large'"-->
-                      <!--[nzPlaceHolder]="'父类型名'"-->
-                      <!--[formControlName]="'ftypeName'"-->
-                      <!--[nzId]="'ftypeNameId'"></nz-input>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+      <div nz-col [nzSpan]="8">
+        <div nz-form-item nz-row>
+          <div nz-form-label nz-col [nzSpan]="5">
+            <label [attr.for]="'ftypeNameId'">父类型名</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="19">
+            <nz-input [nzSize]="'large'"
+                      [nzPlaceHolder]="'父类型名'"
+                      [formControlName]="'ftypeName'"
+                      [nzId]="'ftypeNameId'"></nz-input>
+          </div>
+        </div>
+      </div>
       <div nz-col [nzSpan]="8">
         <div nz-form-item nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
@@ -55,79 +55,110 @@
   </form>
 </div>
 
-<div class="table-cont">
-  <nz-table
-    #nzTable
-    [nzScroll]="_fixHeader?{ y: 320 }:null"
-    [nzAjaxData]="_dataSet"
-    [nzBordered]="_bordered"
-    [nzLoading]="_loading"
-    [nzIsPagination]="_pagination"
-    [nzShowQuickJumper]="true"
-    [nzTotal]="_total"
-    [nzShowTotal]="true"
-    [(nzPageIndex)]="_current"
-    (nzPageIndexChange)="search('index')"
-    [(nzPageSize)]="_pageSize"
-    [nzShowSizeChanger]="true"
-    (nzPageSizeChange)="search('size')"
-    [nzShowFooter]="_footer"
-    [nzShowTitle]="_title"
-    [nzSize]="_size">
-    <span nz-table-title>Here is Title</span>
-    <ng-template #nzFixedHeader [ngIf]="_header&&!_fixHeader">
-      <thead nz-thead>
-      <tr>
-        <th nz-th [nzWidth]="'60px'"><span>tid</span></th>
-        <th nz-th [nzWidth]="'100px'"><span>类型名</span></th>
+<!--<div class="table-cont">-->
+  <!--<nz-table-->
+    <!--#nzTable-->
+    <!--[nzScroll]="_fixHeader?{ y: 320 }:null"-->
+    <!--[nzAjaxData]="_dataSet"-->
+    <!--[nzBordered]="_bordered"-->
+    <!--[nzLoading]="_loading"-->
+    <!--[nzIsPagination]="_pagination"-->
+    <!--[nzShowQuickJumper]="true"-->
+    <!--[nzTotal]="_total"-->
+    <!--[nzShowTotal]="true"-->
+    <!--[(nzPageIndex)]="_current"-->
+    <!--(nzPageIndexChange)="search('index')"-->
+    <!--[(nzPageSize)]="_pageSize"-->
+    <!--[nzShowSizeChanger]="true"-->
+    <!--(nzPageSizeChange)="search('size')"-->
+    <!--[nzShowFooter]="_footer"-->
+    <!--[nzShowTitle]="_title"-->
+    <!--[nzSize]="_size">-->
+    <!--<span nz-table-title>Here is Title</span>-->
+    <!--<ng-template #nzFixedHeader [ngIf]="_header&&!_fixHeader">-->
+      <!--<thead nz-thead>-->
+      <!--<tr>-->
+        <!--<th nz-th [nzWidth]="'60px'"><span>tid</span></th>-->
+        <!--<th nz-th [nzWidth]="'100px'"><span>类型名</span></th>-->
         <!--<th nz-th [nzWidth]="'60px'"><span>fid</span></th>-->
         <!--<th nz-th [nzWidth]="'100px'"><span>父类型名</span></th>-->
+        <!--<th nz-th [nzWidth]="'200px'"><span>备注</span></th>-->
+        <!--<th nz-th [nzWidth]="'60px'"><span>排序</span></th>-->
+        <!--<th nz-th [nzWidth]="'60px'"><span>有效性</span></th>-->
+        <!--<th nz-th><span>操作</span></th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+    <!--</ng-template>-->
+    <!--<tbody nz-tbody>-->
+    <!--<tr nz-tbody-tr *ngFor="let data of nzTable.data">-->
+      <!--<td nz-td>{{data.typeId}}</td>-->
+      <!--<td nz-td>{{data.typeName}}</td>-->
+      <!--<td nz-td>{{data.typePid}}</td>-->
+      <!--<td nz-td>{{data.typePname}}</td>-->
+      <!--<td nz-td>{{data.remark}}</td>-->
+      <!--<td nz-td>{{data.sortNo}}</td>-->
+      <!--<td nz-td>{{data.validity}}</td>-->
+      <!--<td nz-td>-->
+          <!--<span>-->
+              <!--<a (click)="showEditModal(data)">编辑 一 {{data.typeName}}</a>-->
+              <!--<span nz-table-divider></span>-->
+              <!--<a href="#" (click)="showDeleteConfirm(data)">删除 一 {{data.typeName}}</a>-->
+          <!--</span>-->
+      <!--</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--<span nz-table-footer>Here is footer</span>-->
+  <!--</nz-table>-->
+<!--</div>-->
+
+<div class="table-cont">
+  <nz-table #nzTreeTable
+            [nzDataSource]="treeTableDataList"
+            [nzBordered]="true"
+            [nzLoading]="_loading"
+            [nzIsPagination]="false"
+            [nzSize]="_size">
+    <thead nz-thead>
+      <tr>
+        <!--<th nz-th [nzWidth]="'60px'"><span>tid</span></th>-->
+        <th nz-th [nzWidth]="'200px'"><span>类型名</span></th>
+        <th nz-th [nzWidth]="'60px'"><span>fid</span></th>
+        <th nz-th [nzWidth]="'200px'"><span>父类型名</span></th>
         <th nz-th [nzWidth]="'200px'"><span>备注</span></th>
         <th nz-th [nzWidth]="'60px'"><span>排序</span></th>
         <th nz-th [nzWidth]="'60px'"><span>有效性</span></th>
         <th nz-th><span>操作</span></th>
       </tr>
-      </thead>
-    </ng-template>
+    </thead>
     <tbody nz-tbody>
-    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-      <td nz-td>{{data.typeId}}</td>
-      <td nz-td>{{data.typeName}}</td>
-      <!--<td nz-td>{{data.typePid}}</td>-->
-      <!--<td nz-td>{{data.typePname}}</td>-->
-      <td nz-td>{{data.remark}}</td>
-      <td nz-td>{{data.sortNo}}</td>
-      <td nz-td>{{data.validity}}</td>
-      <td nz-td>
-          <span>
-              <a (click)="showEditModal(data)">编辑 一 {{data.typeName}}</a>
-              <span nz-table-divider></span>
-              <a href="#" (click)="showDeleteConfirm(data)">删除 一 {{data.typeName}}</a>
-              <!--<span nz-table-divider></span>-->
-              <!--<nz-dropdown>-->
-                <!--<a class="ant-dropdown-link" nz-dropdown>-->
-                  <!--更多操作 <i class="anticon anticon-down"></i>-->
-                <!--</a>-->
-                <!--<ul nz-menu>-->
-                  <!--<li nz-menu-item>-->
-                    <!--<a target="_blank" rel="noopener noreferrer">-->
-                      <!--1st menu item</a>-->
-                  <!--</li>-->
-                  <!--<li nz-menu-item>-->
-                    <!--<a target="_blank" rel="noopener noreferrer">-->
-                      <!--2nd menu item</a>-->
-                  <!--</li>-->
-                  <!--<li nz-menu-item>-->
-                    <!--<a target="_blank" rel="noopener noreferrer">-->
-                      <!--3rd menu item</a>-->
-                  <!--</li>-->
-                <!--</ul>-->
-              <!--</nz-dropdown>-->
-          </span>
-      </td>
-    </tr>
+      <ng-template ngFor let-data [ngForOf]="nzTreeTable.data">
+        <ng-template ngFor let-item [ngForOf]="expandDataCache[data.typeId]">
+          <tr nz-tbody-tr *ngIf="(item.parent&&item.parent.expand)||!(item.parent)">
+            <td nz-td>
+              <nz-row-indent [nzIndentSize]="item.level"></nz-row-indent>
+              <nz-row-expand-icon [(nzExpand)]="item.expand"
+                                  (nzExpandChange)="collapse(expandDataCache[data.typeId],item,$event)"
+                                  [nzShowExpand]="item.children.length<=0"></nz-row-expand-icon>
+              {{item.typeName}}
+            </td>
+            <!--<td nz-td>{{item.typeId}}</td>-->
+            <!--<td nz-td>{{item.typeName}}</td>-->
+            <td nz-td>{{item.typePid}}</td>
+            <td nz-td>{{item.pTypeName}}</td>
+            <td nz-td>{{item.remark}}</td>
+            <td nz-td>{{item.sortNo}}</td>
+            <td nz-td>{{item.validity}}</td>
+            <td nz-td>
+              <span>
+                <a (click)="showEditModal(item)">编辑 一 {{item.typeName}}</a>
+                <span nz-table-divider></span>
+                <a href="#" (click)="showDeleteConfirm(item)">删除 一 {{item.typeName}}</a>
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </ng-template>
     </tbody>
-    <span nz-table-footer>Here is footer</span>
   </nz-table>
 </div>
 

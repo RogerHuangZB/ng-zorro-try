@@ -10,7 +10,6 @@ import { BaMenuBarComponent } from './components/ba-menu-bar/ba-menu-bar.compone
 import { BaTabBarComponent } from './components/ba-tab-bar/ba-tab-bar.component';
 import {importComs} from "./comsMgr";
 import {BaTabBarService} from "./components/ba-tab-bar/ba-tab-bar.service";
-import {NgZorroAntdModule} from "ng-zorro-antd";
 import { JcManageComponent } from './ddjc/jc-manage/jc-manage.component';
 import { JcBrandManageComponent } from './ddjc/jc-brand-manage/jc-brand-manage.component';
 import { JcTypeManageComponent } from './ddjc/jc-type-manage/jc-type-manage.component';
@@ -22,6 +21,7 @@ import {FileUploadModule} from "ng2-file-upload";
 import {ImageUploadModule} from "angular2-image-upload";
 import {TrustUrlPipe} from "./ddjc/jc-manage/transformTrustUrl";
 import {AuthGuard} from "./auth-guard.service";
+import {NgZorroAntdModule} from "ng-zorro-antd";
 
 @NgModule({
   imports: [
@@ -30,7 +30,7 @@ import {AuthGuard} from "./auth-guard.service";
     ReactiveFormsModule,
     HttpModule,
     routing,
-    NgZorroAntdModule,
+    NgZorroAntdModule.forRoot(),
     FileUploadModule,
     ImageUploadModule.forRoot(),
   ],

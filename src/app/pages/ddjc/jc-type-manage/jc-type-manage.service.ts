@@ -32,6 +32,20 @@ export class JcTypeManageService {
       });
   }
 
+  dataTree(): Promise<any>{
+    let postUrl = this.apiUrl + "jcType/treeData";
+    let body = '';
+    return this.http.post(postUrl, body, {
+      headers: this.headers
+    }).toPromise()
+      .then(this.extractData)
+      .catch((error: Response) => {
+        console.log(error.json());
+        this.pagesService.httpErrorHandle(error.json());
+        return Observable.throw(error);
+      });
+  }
+
   dataList(page:number, rows:number, sort:string, order:string, searchForm:any): Promise<any> {
     let postUrl = this.apiUrl + "jcType/dataGrid";
     let body = "page="+page+"&rows="+rows+"&sort="+sort+"&order="+order;
@@ -58,6 +72,7 @@ export class JcTypeManageService {
         return Observable.throw(error);
       });
   }
+
   /*新增*/
   addRow(row:any):Promise<any>{
     let postUrl = this.apiUrl + "jcType/add";
